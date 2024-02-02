@@ -24,4 +24,28 @@ public class Class {
         }
         return listParents;
     }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public Teacher getClassTeacher() {
+        return classTeacher;
+    }
+
+    public void setClassTeacher(Teacher classTeacher) {
+        this.classTeacher = classTeacher;
+    }
+
+    public ArrayList<Learner> getLearners() {
+        return learners;
+    }
+
+    public void setLearners(ArrayList<Learner> learners) {
+        this.learners = learners;
+    }
 }

@@ -24,4 +24,28 @@ public class Elective {
         }
         return listParents;
     }
+
+    public String getAcademicSubject() {
+        return academicSubject;
+    }
+
+    public void setAcademicSubject(String academicSubject) {
+        this.academicSubject = academicSubject;
+    }
+
+    public ArrayList<Learner> getLearners() {
+        return learners;
+    }
+
+    public void setLearners(ArrayList<Learner> learners) {
+        this.learners = learners;
+    }
+
+    public Teacher getClassTeacher() {
+        return classTeacher;
+    }
+
+    public void setClassTeacher(Teacher classTeacher) {
+        this.classTeacher = classTeacher;
+    }
 }

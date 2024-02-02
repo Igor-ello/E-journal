@@ -24,4 +24,28 @@ public class Section {
         }
         return listParents;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Learner> getLearners() {
+        return learners;
+    }
+
+    public void setLearners(ArrayList<Learner> learners) {
+        this.learners = learners;
+    }
+
+    public Teacher getClassTeacher() {
+        return classTeacher;
+    }
+
+    public void setClassTeacher(Teacher classTeacher) {
+        this.classTeacher = classTeacher;
+    }
 }

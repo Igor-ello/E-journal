@@ -14,10 +14,5 @@ public class Learner extends Participant{
         return parents;
     }
 
-    @Override
-    public String toString() {
-        return "Learner{" +
-                "parents=" + parents +
-                '}';
-    }
+
 }

@@ -7,4 +7,12 @@ public class Participant extends Person {
         super(fullName, phone);
         this.cardID = cardID;
     }
+
+    public int getCardID() {
+        return cardID;
+    }
+
+    public void setCardID(int cardID) {
+        this.cardID = cardID;
+    }
 }
