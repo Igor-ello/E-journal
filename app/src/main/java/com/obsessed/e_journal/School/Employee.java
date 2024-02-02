@@ -1,4 +1,4 @@
-package com.obsessed.e_journal;
+package com.obsessed.e_journal.School;
 
 public class Employee extends Participant {
     private String position;

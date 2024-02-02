@@ -1,16 +1,16 @@
-package com.obsessed.e_journal;
+package com.obsessed.e_journal.School;
 
 import java.util.ArrayList;
 
-public class Section {
-    private School name;
-    private ArrayList<Learner> learners;
+public class Class {
+    private String number;
     private Teacher classTeacher;
+    private ArrayList<Learner> learners;
 
-    public Section(School name, ArrayList<Learner> learners, Teacher classTeacher) {
-        this.name = name;
-        this.learners = learners;
+    public Class(String number, Teacher classTeacher, ArrayList<Learner> learners) {
+        this.number = number;
         this.classTeacher = classTeacher;
+        this.learners = learners;
     }
 
     public ArrayList<Learner> getList(){

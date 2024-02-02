@@ -1,4 +1,4 @@
-package com.obsessed.e_journal;
+package com.obsessed.e_journal.School;
 
 import java.util.ArrayList;
 
@@ -12,5 +12,12 @@ public class Learner extends Participant{
 
     public ArrayList<Parent> getParents() {
         return parents;
+    }
+
+    @Override
+    public String toString() {
+        return "Learner{" +
+                "parents=" + parents +
+                '}';
     }
 }
