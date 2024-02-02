@@ -48,4 +48,13 @@ public class Elective {
     public void setClassTeacher(Teacher classTeacher) {
         this.classTeacher = classTeacher;
     }
+
+    @Override
+    public String toString() {
+        return "Elective{" +
+                "academicSubject='" + academicSubject + '\'' +
+                ", learners=" + learners +
+                ", classTeacher=" + classTeacher +
+                '}';
+    }
 }

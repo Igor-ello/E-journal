@@ -48,4 +48,13 @@ public class Class {
     public void setLearners(ArrayList<Learner> learners) {
         this.learners = learners;
     }
+
+    @Override
+    public String toString() {
+        return "Class{" +
+                "number='" + number + '\'' +
+                ", classTeacher=" + classTeacher +
+                ", learners=" + learners +
+                '}';
+    }
 }

@@ -48,4 +48,13 @@ public class Section {
     public void setClassTeacher(Teacher classTeacher) {
         this.classTeacher = classTeacher;
     }
+
+    @Override
+    public String toString() {
+        return "Section{" +
+                "name='" + name + '\'' +
+                ", learners=" + learners +
+                ", classTeacher=" + classTeacher +
+                '}';
+    }
 }
