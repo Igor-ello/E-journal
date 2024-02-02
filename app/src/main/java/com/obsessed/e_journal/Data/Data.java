@@ -1,8 +1,11 @@
 package com.obsessed.e_journal.Data;
 
+import com.obsessed.e_journal.School.Class;
+import com.obsessed.e_journal.School.Elective;
 import com.obsessed.e_journal.School.Employee;
 import com.obsessed.e_journal.School.Learner;
 import com.obsessed.e_journal.School.Parent;
+import com.obsessed.e_journal.School.School;
 import com.obsessed.e_journal.School.Section;
 import com.obsessed.e_journal.School.Teacher;
 
@@ -16,6 +19,9 @@ public class Data {
     private final ArrayList<Teacher> teachersList;
     private final ArrayList<Employee> empoloyeesList;
     private final ArrayList<Section> sectionsList;
+    private final ArrayList<Elective> electivesList;
+    private final ArrayList<Class> classesList;
+    private final School school;
 
 
     public static Data getInstance() {
@@ -68,6 +74,21 @@ public class Data {
         //Sections
         sectionsList = new ArrayList<>();
         sectionsList.add(new Section("Маткульт", new ArrayList<>(Arrays.asList(learnersList.get(0), learnersList.get(1), learnersList.get(2), learnersList.get(3))), teachersList.get(0)));
+
+        //Elective
+        electivesList = new ArrayList<>();
+        electivesList.add(new Elective("Фундаментальная физика", new ArrayList<>(Arrays.asList(learnersList.get(0), learnersList.get(3), learnersList.get(4), learnersList.get(5))), teachersList.get(1)));
+
+        //Class
+        classesList = new ArrayList<>();
+        classesList.add(new Class("I205", teachersList.get(2), new ArrayList<>(Arrays.asList(learnersList.get(0), learnersList.get(1), learnersList.get(2), learnersList.get(3), learnersList.get(4), learnersList.get(5)))));
+
+        //School
+        school = new School(empoloyeesList, teachersList, learnersList,
+                "1-я Напрудная ул., дом 13, Москва, 129345",
+                "Государственное бюджетное общеобразовательное учреждение города Москвы " +
+                        "\"Многопрофильная школа №1955\"",
+                classesList, electivesList, sectionsList);
     }
 
     public ArrayList<Parent> getParentsList() {
@@ -88,5 +109,17 @@ public class Data {
 
     public ArrayList<Section> getSectionsList() {
         return sectionsList;
+    }
+
+    public ArrayList<Elective> getElectivesList() {
+        return electivesList;
+    }
+
+    public ArrayList<Class> getClassesList() {
+        return classesList;
+    }
+
+    public School getSchool() {
+        return school;
     }
 }

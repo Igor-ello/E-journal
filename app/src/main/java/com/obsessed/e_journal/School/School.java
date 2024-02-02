@@ -27,7 +27,6 @@ public class School {
     public ArrayList<Teacher> getListTeachers(){
         return teachers;
     }
-
     public ArrayList<Employee> getListEmployee(){
         return employees;
     }
@@ -35,13 +34,27 @@ public class School {
         return learners;
     }
 
-//    public ArrayList<Participant> getListParticipant(){
-//        return ;
-//    }
-//
-//    public ArrayList<Person> getListPersonsInSchool(){
-//        return ;
-//    }
+    public ArrayList<Object> getListParticipant(){
+        ArrayList<Object> participantList = new ArrayList<>();
+        participantList.addAll(teachers);
+        participantList.addAll(learners);
+        participantList.addAll(employees);
+        return participantList;
+    }
+
+    public ArrayList<Object> getListPersonsInSchool(){
+        ArrayList<Object> personList = new ArrayList<>();
+        personList.addAll(teachers);
+        personList.addAll(learners);
+        personList.addAll(employees);
+
+        ArrayList<Parent> parentsList = new ArrayList<>();
+        for(Learner learner: learners){
+            parentsList.addAll(learner.getParents());
+        }
+        personList.addAll(parentsList);
+        return personList;
+    }
 
     public void getElectronicJournal(){
 
@@ -109,5 +122,19 @@ public class School {
 
     public void setSections(ArrayList<Section> sections) {
         this.sections = sections;
+    }
+
+    @Override
+    public String toString() {
+        return "School{" +
+                "employees=" + employees +
+                ", teachers=" + teachers +
+                ", learners=" + learners +
+                ", address='" + address + '\'' +
+                ", name='" + name + '\'' +
+                ", classes=" + classes +
+                ", electives=" + electives +
+                ", sections=" + sections +
+                '}';
     }
 }
