@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Learner extends Participant{
     private ArrayList<Parent> parents;
 
-    public Learner(String fullName, int phone, int cardID, ArrayList<Parent> parents) {
+    public Learner(String fullName, long phone, int cardID, ArrayList<Parent> parents) {
         super(fullName, phone, cardID);
         this.parents = parents;
     }
