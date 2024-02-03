@@ -14,5 +14,8 @@ public class Learner extends Participant{
         return parents;
     }
 
+    public String getParentsNames() {
+        return parents.get(0).getFullName() + ", " + parents.get(1).getFullName();
+    }
 
 }
