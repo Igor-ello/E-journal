@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/header"></include>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,5 +36,4 @@
         </TextView>
     </LinearLayout>
 
-    <include layout="@layout/header"></include>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
