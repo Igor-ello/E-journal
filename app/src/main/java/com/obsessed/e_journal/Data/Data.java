@@ -22,6 +22,7 @@ public class Data {
     private final ArrayList<Elective> electivesList;
     private final ArrayList<Class> classesList;
     private final School school;
+    private final String[] persons;
 
 
     public static Data getInstance() {
@@ -89,6 +90,8 @@ public class Data {
                 "Государственное бюджетное общеобразовательное учреждение города Москвы " +
                         "\"Многопрофильная школа №1955\"",
                 classesList, electivesList, sectionsList);
+
+        persons = new String[]{"Learner", "Parent", "Teacher", "Employee"};
     }
 
     public ArrayList<Parent> getParentsList() {
@@ -121,5 +124,9 @@ public class Data {
 
     public School getSchool() {
         return school;
+    }
+
+    public String[] getPersons() {
+        return persons;
     }
 }
