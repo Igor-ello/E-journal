@@ -1,6 +1,7 @@
 package com.obsessed.e_journal.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -47,6 +48,12 @@ public class EJournalActivity extends AppCompatActivity {
         initPerson(gridParents, data.getParentsList());
         initPerson(gridTeachers, data.getTeachersList());
         initPerson(gridEmployees, data.getEmpoloyeesList());
+
+        findViewById(R.id.exit).setOnClickListener(view -> {
+            Intent intent = new Intent(EJournalActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     @SuppressLint("SetTextI18n")

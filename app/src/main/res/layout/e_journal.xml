@@ -1,70 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/header"></include>
 
-    <ScrollView
+    <include layout="@layout/exit_to_app"></include>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <include layout="@layout/header"></include>
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_height="match_parent">
 
-            <TextView
-                style="@style/EJournalTvStyle"
-                android:text="All learners">
-            </TextView>
-
-            <GridLayout
-                android:id="@+id/gridLearners"
-                style="@style/EJournalGridStyle">
-            </GridLayout>
-
-            <TextView
-                style="@style/EJournalTvStyle"
-                android:text="All parents">
-            </TextView>
-
-            <GridLayout
-                android:id="@+id/gridParents"
-                style="@style/EJournalGridStyle">
-            </GridLayout>
-
-            <TextView
-                style="@style/EJournalTvStyle"
-                android:text="All teachers">
-            </TextView>
-
-            <GridLayout
-                android:id="@+id/gridTeachers"
-                style="@style/EJournalGridStyle">
-            </GridLayout>
-
-            <TextView
-                style="@style/EJournalTvStyle"
-                android:text="All employees">
-            </TextView>
-
-            <GridLayout
-                android:id="@+id/gridEmployees"
-                style="@style/EJournalGridStyle">
-            </GridLayout>
-
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp">
-            </TextView>
+                android:orientation="vertical"
+                android:layout_margin="10dp">
 
-        </LinearLayout>
+                <TextView
+                    style="@style/EJournalTvStyle"
+                    android:text="All learners">
+                </TextView>
 
-    </ScrollView>
+                <GridLayout
+                    android:id="@+id/gridLearners"
+                    style="@style/EJournalGridStyle">
+                </GridLayout>
 
-</LinearLayout>
+                <TextView
+                    style="@style/EJournalTvStyle"
+                    android:text="All parents">
+                </TextView>
+
+                <GridLayout
+                    android:id="@+id/gridParents"
+                    style="@style/EJournalGridStyle">
+                </GridLayout>
+
+                <TextView
+                    style="@style/EJournalTvStyle"
+                    android:text="All teachers">
+                </TextView>
+
+                <GridLayout
+                    android:id="@+id/gridTeachers"
+                    style="@style/EJournalGridStyle">
+                </GridLayout>
+
+                <TextView
+                    style="@style/EJournalTvStyle"
+                    android:text="All employees">
+                </TextView>
+
+                <GridLayout
+                    android:id="@+id/gridEmployees"
+                    style="@style/EJournalGridStyle">
+                </GridLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp">
+                </TextView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
