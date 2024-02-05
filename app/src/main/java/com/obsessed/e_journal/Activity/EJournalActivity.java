@@ -92,8 +92,7 @@ public class EJournalActivity extends AppCompatActivity {
             textView.setText(TextUtils.concat(type, spanString, info));
 
             // Устанавливаем размер текста
-            //float textSizePx = getResources().getDimensionPixelSize(R.dimen.text_size); // получаем размер из ресурсов
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20); // устанавливаем размер в пикселях
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
             // Добавляем TextView в GridLayout
             grid.addView(textView);

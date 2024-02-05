@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText editText;
     int positionSelected = -1;
     Data data;
+    String[] persons;
     boolean isParent;
 
     @Override
@@ -35,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         data = Data.getInstance();
-        String[] persons = data.getPersons();
+        persons = data.getPersons();
 
         Spinner spinner = findViewById(R.id.spinner); //Выбор персоны, определённого типа
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, persons);
@@ -131,6 +133,9 @@ public class LoginActivity extends AppCompatActivity {
         parentField = findViewById(R.id.parentField);
         et_participant = findViewById(R.id.et_participant);
         et_parent = findViewById(R.id.et_parent);
+
+        TextView t = findViewById(R.id.header);
+        t.setText("Login");
     }
 
     private void clearFields(){
