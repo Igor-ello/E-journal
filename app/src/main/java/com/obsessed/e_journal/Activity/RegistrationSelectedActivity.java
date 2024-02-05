@@ -68,7 +68,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
                 textView.setText("Position");
                 editText.setInputType(InputType.TYPE_CLASS_TEXT);
                 editTextArrayList.add(editText);
-            } Log.d("MyLog", "The object type is not being processed");
+            } else Log.d("MyLog", "The object type is not being processed");
         } else Log.d("MyLog", "The message has not been received!");
 
         findViewById(R.id.save).setOnClickListener(view -> {

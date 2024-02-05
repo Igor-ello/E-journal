@@ -71,8 +71,8 @@ public class Data {
         //Empoloyees
         empoloyeesList = new ArrayList<>();
         empoloyeesList.add(new Employee("Николаева Марина Александровна", 9894567890L, 20001, "Администратор"));
-        empoloyeesList.add(new Employee("Сидоров Алексей Владимирович", 9896543210L, 20003, "Уборщик"));
-        empoloyeesList.add(new Employee("Кузнецова Татьяна Петровна", 9891234567L, 20004, "Кухарка"));
+        empoloyeesList.add(new Employee("Сидоров Алексей Владимирович", 9896543210L, 20002, "Уборщик"));
+        empoloyeesList.add(new Employee("Кузнецова Татьяна Петровна", 9891234567L, 20003, "Кухарка"));
 
         //Sections
         sectionsList = new ArrayList<>();
