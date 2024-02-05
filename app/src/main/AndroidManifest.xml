@@ -13,7 +13,14 @@
         android:theme="@style/Theme.Ejournal"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.AccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.EJournalActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,21 +28,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".Activity.LoginActivity"
-            android:exported="true">
-        </activity>
-
         <activity
             android:name=".Activity.RegistrationActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".Activity.RegistrationSelectedActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

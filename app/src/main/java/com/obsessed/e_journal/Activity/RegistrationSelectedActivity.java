@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,12 +72,12 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
         } else Log.d("MyLog", "The message has not been received!");
 
         findViewById(R.id.save).setOnClickListener(view -> {
-            boolean flag = true;
+            boolean isAllFialdsFillIn = true;
             for (EditText ed: editTextArrayList) {
                 if(ed.getText().equals("") || ed.getText().equals(null))
-                    flag = false;
+                    isAllFialdsFillIn = false;
             }
-            if(flag){
+            if(isAllFialdsFillIn){
                 if(person.equals("Learner")){
                     data.addEntryLearnersList(new Learner(editTextArrayList.get(0).getText().toString(),
                             Long.parseLong(editTextArrayList.get(1).getText().toString()),
@@ -100,7 +101,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(RegistrationSelectedActivity.this, EJournalActivity.class);
                 startActivity(intent);
-            }
+            } else Toast.makeText(this, "Fill in all the fields", Toast.LENGTH_SHORT).show();
         });
     }
 

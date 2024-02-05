@@ -5,6 +5,7 @@ import com.obsessed.e_journal.School.Elective;
 import com.obsessed.e_journal.School.Employee;
 import com.obsessed.e_journal.School.Learner;
 import com.obsessed.e_journal.School.Parent;
+import com.obsessed.e_journal.School.Person;
 import com.obsessed.e_journal.School.School;
 import com.obsessed.e_journal.School.Section;
 import com.obsessed.e_journal.School.Teacher;
@@ -23,6 +24,7 @@ public class Data {
     private final ArrayList<Class> classesList;
     private final School school;
     private final String[] persons;
+    private Person user;
 
 
     public static Data getInstance() {
@@ -94,6 +96,31 @@ public class Data {
         persons = new String[]{"Learner", "Parent", "Teacher", "Employee"};
     }
 
+    public Learner getLearnerByID(int ID) {
+        for (Learner learner : learnersList) {
+            if (learner.getCardID() == ID) {
+                return learner;
+            }
+        }
+        return null;
+    }
+    public Teacher getTeacherByID(int ID) {
+        for (Teacher teacher : teachersList) {
+            if (teacher.getCardID() == ID) {
+                return teacher;
+            }
+        }
+        return null;
+    }
+    public Employee getEmployeeByID(int ID) {
+        for (Employee employee : empoloyeesList) {
+            if (employee.getCardID() == ID) {
+                return employee;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Parent> getParentsList() {
         return parentsList;
     }
@@ -145,5 +172,13 @@ public class Data {
 
     public void addEntryEmpoloyeesList(Employee employee) {
         empoloyeesList.add(employee);
+    }
+
+    public Person getUser() {
+        return user;
+    }
+
+    public void setUser(Person user) {
+        this.user = user;
     }
 }

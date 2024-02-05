@@ -8,6 +8,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,11 @@ public class EJournalActivity extends AppCompatActivity {
             finish();
         });
 
+        findViewById(R.id.account).setOnClickListener(view -> {
+            Intent intent = new Intent(EJournalActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void init(){
@@ -95,7 +101,7 @@ public class EJournalActivity extends AppCompatActivity {
                 Employee employee = (Employee) person;
                 type = "Employee: ";
                 info = ", Card ID: " + employee.getCardID() + ", Position: " + employee.getPosition();
-            }
+            } else Log.d("MyLog", "The object type is not being processed");
             textView.setText(TextUtils.concat(type, spanString, info));
 
             // Устанавливаем размер текста

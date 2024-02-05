@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Participant;
+import com.obsessed.e_journal.School.Person;
 
 import java.util.ArrayList;
 
@@ -89,26 +90,26 @@ public class LoginActivity extends AppCompatActivity {
         isParent = false;
 
         if(!editText.equals("")){
-            ArrayList<? extends Participant> arrayList = new ArrayList<>();
             int id = Integer.parseInt(String.valueOf(editText.getText()));
+            Person person = null;
 
             //проверка на вход
             switch (positionSelected){
                 case 0: {   //Learner
-                    arrayList = data.getLearnersList();
+                    person = data.getLearnerByID(id);
                     break;
                 }
                 case 1: {   //Parent
                     isParent = true;
-                    arrayList = data.getLearnersList();
+                    person = data.getLearnerByID(id);
                     break;
                 }
                 case 2: {   //Teacher
-                    arrayList = data.getTeachersList();
+                    person = data.getTeacherByID(id);
                     break;
                 }
                 case 3: {   //Employee
-                    arrayList = data.getEmpoloyeesList();
+                    person = data.getEmployeeByID(id);
                     break;
                 }
                 default:
@@ -116,9 +117,9 @@ public class LoginActivity extends AppCompatActivity {
                     break;
             }
 
-            for(int i = 0; i<arrayList.size(); i++){
-                if(arrayList.get(i).getCardID() == id)
-                    isIdCorrect = true;
+            if(person != null){
+                isIdCorrect = true;
+                data.setUser(person);
             }
         }
         else Toast.makeText(this, "Enter ID, please.", Toast.LENGTH_SHORT).show();
