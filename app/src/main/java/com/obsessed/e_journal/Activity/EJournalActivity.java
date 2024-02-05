@@ -38,11 +38,7 @@ public class EJournalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.e_journal);
 
-        data = Data.getInstance();
-        gridLearners = findViewById(R.id.gridLearners);
-        gridParents = findViewById(R.id.gridParents);
-        gridTeachers = findViewById(R.id.gridTeachers);
-        gridEmployees = findViewById(R.id.gridEmployees);
+        init();
 
         initPerson(gridLearners, data.getLearnersList());
         initPerson(gridParents, data.getParentsList());
@@ -54,6 +50,17 @@ public class EJournalActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+    }
+
+    private void init(){
+        data = Data.getInstance();
+        gridLearners = findViewById(R.id.gridLearners);
+        gridParents = findViewById(R.id.gridParents);
+        gridTeachers = findViewById(R.id.gridTeachers);
+        gridEmployees = findViewById(R.id.gridEmployees);
+        TextView header = findViewById(R.id.header);
+        header.setText("EJournal");
     }
 
     @SuppressLint("SetTextI18n")
