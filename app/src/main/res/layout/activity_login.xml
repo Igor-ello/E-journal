@@ -73,7 +73,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/save"
             style="@style/TextStyleBold"
             android:layout_marginTop="10dp"
             android:text="Login">

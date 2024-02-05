@@ -19,6 +19,13 @@
             android:orientation="vertical">
         </GridLayout>
 
+        <Button
+            android:id="@+id/save"
+            style="@style/TextStyleBold"
+            android:layout_marginTop="10dp"
+            android:text="Save">
+        </Button>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

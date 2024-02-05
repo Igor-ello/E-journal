@@ -129,4 +129,21 @@ public class Data {
     public String[] getPersons() {
         return persons;
     }
+
+    // Add new entry
+    public void addEntryLearnersList(Learner learner) {
+        learnersList.add(learner);
+    }
+
+    public void addEntryParentsList(Parent parent) {
+        parentsList.add(parent);
+    }
+
+    public void addEntryTeachersList(Teacher teacher) {
+        teachersList.add(teacher);
+    }
+
+    public void addEntryEmpoloyeesList(Employee employee) {
+        empoloyeesList.add(employee);
+    }
 }

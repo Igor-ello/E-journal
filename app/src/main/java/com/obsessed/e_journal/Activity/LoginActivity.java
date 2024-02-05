@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Participant;
-import com.obsessed.e_journal.School.Person;
 
 import java.util.ArrayList;
 
@@ -67,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         };
         spinner.setOnItemSelectedListener(itemSelectedListener);
 
-        findViewById(R.id.login).setOnClickListener(view -> {
+        findViewById(R.id.save).setOnClickListener(view -> {
             if(checkPersonID()) {
                 Intent intent = new Intent(LoginActivity.this, EJournalActivity.class);
                 startActivity(intent);
@@ -82,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.registration).setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
             startActivity(intent);
-            finish();
         });
     }
 
