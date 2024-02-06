@@ -55,7 +55,6 @@ public class EJournalActivity extends AppCompatActivity {
         findViewById(R.id.account).setOnClickListener(view -> {
             Intent intent = new Intent(EJournalActivity.this, AccountActivity.class);
             startActivity(intent);
-            finish();
         });
     }
 
