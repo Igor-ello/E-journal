@@ -77,7 +77,27 @@ public class AccountActivity extends AppCompatActivity {
         editText.setText(((Learner) user).getParents().get(1).getFullName());
     }
     private void addParentFields(){
-        initPerson();
+        createLinearLayout(new String[]{"TextView", "EditText"});
+        textView.setText("Father: ");
+        editText.setText(data.getParentArrayList().get(0).getFullName());
+
+        createLinearLayout(new String[]{"TextView", "EditText"});
+        textView.setText("Phone: ");
+        editText.setText(String.valueOf(data.getParentArrayList().get(0).getPhone()));
+
+        createLinearLayout(new String[]{"TextView", "EditText"});
+        textView.setText("Mother: ");
+        editText.setText(data.getParentArrayList().get(1).getFullName());
+
+        createLinearLayout(new String[]{"TextView", "EditText"});
+        textView.setText("Phone: ");
+        editText.setText(String.valueOf(data.getParentArrayList().get(1).getPhone()));
+
+        createLinearLayout(new String[]{"TextView", "EditText"});
+        textView.setText("Learner: ");
+        Learner learner = data.getLearnerByParent((Parent) user);
+        if(learner != null)
+            editText.setText(learner.getFullName());
     }
 
     private void addTeacherFields(){
@@ -97,7 +117,7 @@ public class AccountActivity extends AppCompatActivity {
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Position");
-        editText.setInputType(InputType.TYPE_CLASS_TEXT);
+        editText.setText(((Employee) user).getPosition());
     }
 
     private void initPerson(){

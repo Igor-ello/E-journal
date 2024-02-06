@@ -25,6 +25,7 @@ public class Data {
     private final School school;
     private final String[] persons;
     private Person user;
+    private ArrayList<Parent> parentArrayList;
 
 
     public static Data getInstance() {
@@ -94,6 +95,7 @@ public class Data {
                 classesList, electivesList, sectionsList);
 
         persons = new String[]{"Learner", "Parent", "Teacher", "Employee"};
+        parentArrayList = new ArrayList<>();
     }
 
     public Learner getLearnerByID(int ID) {
@@ -127,6 +129,23 @@ public class Data {
             parents.add(parent.getFullName());
         }
         return parents;
+    }
+
+    public Learner getLearnerByParent(Parent parent){
+        for (Learner learner: learnersList) {
+            if(learner.getParents().get(0) == parent || learner.getParents().get(1) == parent)
+                return learner;
+        }
+        return null;
+    }
+
+    public void setParentsByLearnerID(int learner_id){
+        for(Learner learner: learnersList) {
+            if(learner.getCardID() == learner_id){
+                parentArrayList.add(learner.getParents().get(0));
+                parentArrayList.add(learner.getParents().get(1));
+            }
+        }
     }
 
     public ArrayList<Parent> getParentsList() {
@@ -188,5 +207,13 @@ public class Data {
 
     public void setUser(Person user) {
         this.user = user;
+    }
+
+    public ArrayList<Parent> getParentArrayList() {
+        return parentArrayList;
+    }
+
+    public void setParentArrayList(ArrayList<Parent> parentArrayList) {
+        this.parentArrayList = parentArrayList;
     }
 }

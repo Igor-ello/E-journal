@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.R;
-import com.obsessed.e_journal.School.Participant;
 import com.obsessed.e_journal.School.Person;
 
 import java.util.ArrayList;
@@ -36,8 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        data = Data.getInstance();
-        persons = data.getPersons();
+        init();
 
         Spinner spinner = findViewById(R.id.spinner); //Выбор персоны, определённого типа
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, persons);
@@ -72,8 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, EJournalActivity.class);
                 startActivity(intent);
                 finish();
-
-                //isParent TODO
             } else {
                 Toast.makeText(this, "Enter correct card ID, please", Toast.LENGTH_SHORT).show();
             }
@@ -83,6 +79,12 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
             startActivity(intent);
         });
+    }
+
+    private  void init(){
+        data = Data.getInstance();
+        persons = data.getPersons();
+        data.setParentArrayList(new ArrayList<>());
     }
 
     private boolean checkPersonID(){
@@ -119,7 +121,11 @@ public class LoginActivity extends AppCompatActivity {
 
             if(person != null){
                 isIdCorrect = true;
-                data.setUser(person);
+                if(isParent){
+                    data.setParentsByLearnerID(id);
+                    if(data.getParentArrayList() != null)
+                        data.setUser(data.getParentArrayList().get(0));
+                } else data.setUser(person);
             }
         }
         else Toast.makeText(this, "Enter ID, please.", Toast.LENGTH_SHORT).show();
