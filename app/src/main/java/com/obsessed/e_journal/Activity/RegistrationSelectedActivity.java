@@ -105,11 +105,9 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
 
         createLinearLayout(new String[]{"TextView", "Spinner"});
         textView.setText("Отец");
-        spinnertArrayList.add(spinner);
 
         createLinearLayout(new String[]{"TextView", "Spinner"});
         textView.setText("Мать");
-        spinnertArrayList.add(spinner);
     }
     private void addParentFields(){
         initPerson();
@@ -211,5 +209,6 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
             }
         };
         spinner.setOnItemSelectedListener(itemSelectedListener);
+        spinnertArrayList.add(spinner);
     }
 }
