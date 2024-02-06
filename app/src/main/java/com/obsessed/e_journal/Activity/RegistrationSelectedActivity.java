@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.obsessed.e_journal.AddEntryPersonToList;
 import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Employee;
@@ -25,6 +26,8 @@ import com.obsessed.e_journal.School.Teacher;
 import java.util.ArrayList;
 
 public class RegistrationSelectedActivity extends AppCompatActivity {
+
+    AddEntryPersonToList addEntryPersonToList;
     GridLayout gridLayout;
     LinearLayout linearLayout;
     TextView textView, header;
@@ -79,24 +82,13 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
             }
             if(isAllFialdsFillIn){
                 if(person.equals("Learner")){
-                    data.addEntryLearnersList(new Learner(editTextArrayList.get(0).getText().toString(),
-                            Long.parseLong(editTextArrayList.get(1).getText().toString()),
-                            Integer.parseInt(editTextArrayList.get(2).getText().toString()),
-                            new ArrayList<>()));
+                    addEntryPersonToList.addEntryLearnersList(editTextArrayList);
                 } else if(person.equals("Parent")) {
-                    data.addEntryParentsList(new Parent(editTextArrayList.get(0).getText().toString(),
-                            Long.parseLong(editTextArrayList.get(1).getText().toString())));
+                    addEntryPersonToList.addEntryParentsList(editTextArrayList);
                 } else if(person.equals("Teacher")) {
-                    data.addEntryTeachersList(new Teacher(editTextArrayList.get(0).getText().toString(),
-                            Long.parseLong(editTextArrayList.get(1).getText().toString()),
-                            Integer.parseInt(editTextArrayList.get(2).getText().toString()),
-                            editTextArrayList.get(3).getText().toString(),
-                           editTextArrayList.get(4).getText().toString()));
+                    addEntryPersonToList.addEntryTeachersList(editTextArrayList);
                 } else if(person.equals("Employee")) {
-                    data.addEntryEmpoloyeesList(new Employee(editTextArrayList.get(0).getText().toString(),
-                            Long.parseLong(editTextArrayList.get(1).getText().toString()),
-                            Integer.parseInt(editTextArrayList.get(2).getText().toString()),
-                            editTextArrayList.get(3).getText().toString()));
+                    addEntryPersonToList.addEntryEmpoloyeesList(editTextArrayList);
                 } else Log.d("MyLog", "The message has not been received!");
 
                 Intent intent = new Intent(RegistrationSelectedActivity.this, EJournalActivity.class);
@@ -107,6 +99,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
 
     private void init(){
         data = Data.getInstance();
+        addEntryPersonToList = AddEntryPersonToList.getInstance();
         editTextArrayList = new ArrayList<>();
         gridLayout = findViewById(R.id.grid);
         header = findViewById(R.id.header);
