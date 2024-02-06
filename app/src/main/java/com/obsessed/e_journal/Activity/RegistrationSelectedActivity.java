@@ -84,6 +84,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
                 } else Log.d("MyLog", "The message has not been received!");
 
                 Intent intent = new Intent(RegistrationSelectedActivity.this, EJournalActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             } else Toast.makeText(this, "Fill in all the fields", Toast.LENGTH_SHORT).show();
         });
@@ -100,7 +101,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
     }
 
     private void addLearnerFields(){
-        initParticipant();
+        initPerson();
 
         createLinearLayout(new String[]{"TextView", "Spinner"});
         textView.setText("Отец");
@@ -115,7 +116,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
     }
 
     private void addTeacherFields(){
-        initParticipant();
+        initPerson();
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Position");
@@ -127,7 +128,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
     }
 
     private void addEmployeeFields(){
-        initParticipant();
+        initPerson();
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Position");
@@ -142,14 +143,6 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Phone");
         editText.setInputType(InputType.TYPE_CLASS_PHONE);
-    }
-
-    private void initParticipant(){
-        initPerson();
-
-        createLinearLayout(new String[]{"TextView", "EditText"});
-        textView.setText("Card ID");
-        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     private void createLinearLayout(String[] types){

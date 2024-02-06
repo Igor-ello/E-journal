@@ -29,7 +29,7 @@ public class AddEntryPersonToList extends RegistrationSelectedActivity {
     public void addEntryLearnersList(ArrayList<EditText> editTextArrayList, ArrayList<Parent> parentArrayList){
         data.addEntryLearnersList(new Learner(editTextArrayList.get(0).getText().toString(),
                 Long.parseLong(editTextArrayList.get(1).getText().toString()),
-                Integer.parseInt(editTextArrayList.get(2).getText().toString()),
+                data.getLearnersList().get(data.getLearnersList().size()-1).getCardID()+1,
                 parentArrayList));
     }
 
@@ -41,15 +41,15 @@ public class AddEntryPersonToList extends RegistrationSelectedActivity {
     public void addEntryTeachersList(ArrayList<EditText> editTextArrayList){
         data.addEntryTeachersList(new Teacher(editTextArrayList.get(0).getText().toString(),
                 Long.parseLong(editTextArrayList.get(1).getText().toString()),
-                Integer.parseInt(editTextArrayList.get(2).getText().toString()),
-                editTextArrayList.get(3).getText().toString(),
-                editTextArrayList.get(4).getText().toString()));
+                data.getTeachersList().get(data.getTeachersList().size()-1).getCardID()+1,
+                editTextArrayList.get(2).getText().toString(),
+                editTextArrayList.get(3).getText().toString()));
     }
 
     public void addEntryEmpoloyeesList(ArrayList<EditText> editTextArrayList){
         data.addEntryEmpoloyeesList(new Employee(editTextArrayList.get(0).getText().toString(),
                 Long.parseLong(editTextArrayList.get(1).getText().toString()),
-                Integer.parseInt(editTextArrayList.get(2).getText().toString()),
-                editTextArrayList.get(3).getText().toString()));
+                data.getEmpoloyeesList().get(data.getEmpoloyeesList().size()-1).getCardID()+1,
+                editTextArrayList.get(2).getText().toString()));
     }
 }
