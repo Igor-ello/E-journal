@@ -66,7 +66,7 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void addLearnerFields(){
-        initPerson();
+        initParticipant();
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Father: ");
@@ -81,7 +81,7 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void addTeacherFields(){
-        initPerson();
+        initParticipant();
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Position: ");
@@ -93,7 +93,7 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void addEmployeeFields(){
-        initPerson();
+        initParticipant();
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Position");

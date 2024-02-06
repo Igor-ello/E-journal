@@ -75,12 +75,16 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
                     parentArrayList.add(data.getParentsList().get(spinnertArrayList.get(0).getSelectedItemPosition()));
                     parentArrayList.add(data.getParentsList().get(spinnertArrayList.get(1).getSelectedItemPosition()));
                     addEntryPersonToList.addEntryLearnersList(editTextArrayList, parentArrayList);
+                    data.setUser(data.getLearnersList().get(data.getLearnersList().size()-1));
                 } else if(person.equals("Parent")) {
                     addEntryPersonToList.addEntryParentsList(editTextArrayList);
+                    data.setUser(data.getParentsList().get(data.getParentsList().size()-1));
                 } else if(person.equals("Teacher")) {
                     addEntryPersonToList.addEntryTeachersList(editTextArrayList);
+                    data.setUser(data.getTeachersList().get(data.getTeachersList().size()-1));
                 } else if(person.equals("Employee")) {
                     addEntryPersonToList.addEntryEmpoloyeesList(editTextArrayList);
+                    data.setUser(data.getEmpoloyeesList().get(data.getEmpoloyeesList().size()-1));
                 } else Log.d("MyLog", "The message has not been received!");
 
                 Intent intent = new Intent(RegistrationSelectedActivity.this, EJournalActivity.class);
