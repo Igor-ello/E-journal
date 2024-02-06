@@ -26,11 +26,11 @@ public class AddEntryPersonToList extends RegistrationSelectedActivity {
         return uniqueAddEntryPersonToList;
     }
 
-    public void addEntryLearnersList(ArrayList<EditText> editTextArrayList){
+    public void addEntryLearnersList(ArrayList<EditText> editTextArrayList, ArrayList<Parent> parentArrayList){
         data.addEntryLearnersList(new Learner(editTextArrayList.get(0).getText().toString(),
                 Long.parseLong(editTextArrayList.get(1).getText().toString()),
                 Integer.parseInt(editTextArrayList.get(2).getText().toString()),
-                new ArrayList<>()));
+                parentArrayList));
     }
 
     public void addEntryParentsList(ArrayList<EditText> editTextArrayList){

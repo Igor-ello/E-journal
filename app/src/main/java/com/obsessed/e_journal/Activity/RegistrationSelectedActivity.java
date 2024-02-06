@@ -6,9 +6,13 @@ import android.text.InputType;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.obsessed.e_journal.AddEntryPersonToList;
 import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.R;
-import com.obsessed.e_journal.School.Employee;
-import com.obsessed.e_journal.School.Learner;
 import com.obsessed.e_journal.School.Parent;
-import com.obsessed.e_journal.School.Teacher;
 
 import java.util.ArrayList;
 
@@ -30,8 +31,11 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
     AddEntryPersonToList addEntryPersonToList;
     GridLayout gridLayout;
     LinearLayout linearLayout;
+    Spinner spinner;
     TextView textView, header;
     ArrayList<EditText> editTextArrayList;
+    ArrayList<Spinner> spinnertArrayList;
+    ArrayList<Parent> parentArrayList;
     EditText editText;
     String person;
     Data data;
@@ -48,29 +52,14 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
             person = extras.getString("person");
 
             if(person.equals("Learner")){
-                initParticipant();
+                spinnertArrayList = new ArrayList<>();
+                addLearnerFields();
             } else if(person.equals("Parent")) {
-                initPerson();
+                addParentFields();
             } else if(person.equals("Teacher")) {
-                initParticipant();
-
-                updateVariables();
-                textView.setText("Position");
-                editText.setInputType(InputType.TYPE_CLASS_TEXT);
-                editTextArrayList.add(editText);
-
-                updateVariables(); // берём новый textView и editText
-                textView.setText("Qualification");
-                editText.setInputType(InputType.TYPE_CLASS_TEXT);
-                editTextArrayList.add(editText);
-
+                addTeacherFields();
             } else if(person.equals("Employee")) {
-                initParticipant();
-
-                updateVariables(); // берём новый textView и editText
-                textView.setText("Position");
-                editText.setInputType(InputType.TYPE_CLASS_TEXT);
-                editTextArrayList.add(editText);
+                addEmployeeFields();
             } else Log.d("MyLog", "The object type is not being processed");
         } else Log.d("MyLog", "The message has not been received!");
 
@@ -82,7 +71,10 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
             }
             if(isAllFialdsFillIn){
                 if(person.equals("Learner")){
-                    addEntryPersonToList.addEntryLearnersList(editTextArrayList);
+                    parentArrayList = new ArrayList<>();
+                    parentArrayList.add(data.getParentsList().get(spinnertArrayList.get(0).getSelectedItemPosition()));
+                    parentArrayList.add(data.getParentsList().get(spinnertArrayList.get(1).getSelectedItemPosition()));
+                    addEntryPersonToList.addEntryLearnersList(editTextArrayList, parentArrayList);
                 } else if(person.equals("Parent")) {
                     addEntryPersonToList.addEntryParentsList(editTextArrayList);
                 } else if(person.equals("Teacher")) {
@@ -102,62 +94,129 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
         addEntryPersonToList = AddEntryPersonToList.getInstance();
         editTextArrayList = new ArrayList<>();
         gridLayout = findViewById(R.id.grid);
+
         header = findViewById(R.id.header);
         header.setText("Registration");
     }
 
+    private void addLearnerFields(){
+        initParticipant();
+
+        createLinearLayout(new String[]{"TextView", "Spinner"});
+        textView.setText("Отец");
+        spinnertArrayList.add(spinner);
+
+        createLinearLayout(new String[]{"TextView", "Spinner"});
+        textView.setText("Мать");
+        spinnertArrayList.add(spinner);
+    }
+    private void addParentFields(){
+        initPerson();
+    }
+
+    private void addTeacherFields(){
+        initParticipant();
+
+        createLinearLayout(new String[]{"TextView", "EditText"});
+        textView.setText("Position");
+        editText.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        createLinearLayout(new String[]{"TextView", "EditText"}); // берём новый textView и editText
+        textView.setText("Qualification");
+        editText.setInputType(InputType.TYPE_CLASS_TEXT);
+    }
+
+    private void addEmployeeFields(){
+        initParticipant();
+
+        createLinearLayout(new String[]{"TextView", "EditText"});
+        textView.setText("Position");
+        editText.setInputType(InputType.TYPE_CLASS_TEXT);
+    }
+
     private void initPerson(){
-        updateVariables(); // берём новый textView и editText
+        createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Full name");
         editText.setInputType(InputType.TYPE_CLASS_TEXT);
-        editTextArrayList.add(editText);
 
-        updateVariables();
+        createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Phone");
         editText.setInputType(InputType.TYPE_CLASS_PHONE);
-        editTextArrayList.add(editText);
     }
 
     private void initParticipant(){
         initPerson();
 
-        updateVariables();
+        createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Card ID");
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-        editTextArrayList.add(editText);
     }
 
-    private void updateVariables(){
-        linearLayout = getNewLinearLayout();
-        textView = (TextView) linearLayout.getChildAt(0);
-        editText = (EditText) linearLayout.getChildAt(1);
+    private void createLinearLayout(String[] types){
+        newLinearLayout();
+        for (String type: types) {
+            if(type.equals("TextView")){
+                newTextView();
+                linearLayout.addView(textView);
+            } else if(type.equals("EditText")){
+                newEditText();
+                linearLayout.addView(editText);
+            } else if(type.equals("Spinner")) {
+                newSpinner();
+                linearLayout.addView(spinner);
+            }
+        }
         gridLayout.addView(linearLayout);
     }
 
-    private LinearLayout getNewLinearLayout(){
-        LinearLayout linearLayout = new LinearLayout(getApplicationContext());
+    private void newTextView(){
+        textView = new TextView(getApplicationContext());
+        textView.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+    }
+
+    private void newEditText(){
+        editText = new EditText(getApplicationContext());
+        editText.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        editTextArrayList.add(editText);
+    }
+
+    private void newLinearLayout(){
+        linearLayout = new LinearLayout(getApplicationContext());
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         linearLayout.setGravity(Gravity.CENTER);
+    }
 
-        TextView textView = new TextView(getApplicationContext());
+    private void newSpinner() {
+        spinner = new Spinner(getApplicationContext());
         textView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, data.getParentsFullNames());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
-        EditText editText = new EditText(getApplicationContext());
-        editText.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
+        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+            }
 
-        linearLayout.addView(textView, 0);
-        linearLayout.addView(editText, 1);
-        return linearLayout;
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        };
+        spinner.setOnItemSelectedListener(itemSelectedListener);
     }
 }

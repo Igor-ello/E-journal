@@ -121,6 +121,14 @@ public class Data {
         return null;
     }
 
+    public ArrayList<String> getParentsFullNames(){
+        ArrayList<String> parents = new ArrayList<>();
+        for (Parent parent: parentsList) {
+            parents.add(parent.getFullName());
+        }
+        return parents;
+    }
+
     public ArrayList<Parent> getParentsList() {
         return parentsList;
     }
