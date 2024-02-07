@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adminConsole"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@color/white">
+
+    <LinearLayout
+        style="@style/EJournalAdminLayoutStyle">
+
+        <ImageView
+            android:id="@+id/add_school"
+            style="@style/EJournalAdminTvStyle"
+            android:src="@drawable/add_school">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/EJournalAdminLayoutStyle">
+
+        <ImageView
+            android:id="@+id/add_class"
+            style="@style/EJournalAdminTvStyle"
+            android:src="@drawable/add_class">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/EJournalAdminLayoutStyle">
+
+        <ImageView
+            android:id="@+id/add_elective"
+            style="@style/EJournalAdminTvStyle"
+            android:src="@drawable/add_elective">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/EJournalAdminLayoutStyle">
+
+        <ImageView
+            android:id="@+id/add_sections"
+            style="@style/EJournalAdminTvStyle"
+            android:src="@drawable/add_sections">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/EJournalAdminLayoutStyle">
+
+        <ImageView
+            android:id="@+id/tree"
+            style="@style/EJournalAdminTvStyle"
+            android:src="@drawable/tree">
+        </ImageView>
+    </LinearLayout>
+</LinearLayout>

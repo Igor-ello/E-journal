@@ -10,11 +10,8 @@ import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +30,8 @@ import java.util.ArrayList;
 public class EJournalActivity extends AppCompatActivity {
     GridLayout gridLearners, gridParents, gridTeachers, gridEmployees;
     Data data;
+    Person user;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +39,16 @@ public class EJournalActivity extends AppCompatActivity {
         setContentView(R.layout.e_journal);
 
         init();
+        if(!(user instanceof Employee)){
+            LinearLayout linearLayout = findViewById(R.id.adminConsole);
+            linearLayout.setVisibility(View.GONE);
+        } else {
+            if(!(((Employee) user).getPosition().equals("Admin") &&
+                    ((Employee) user).getCardID() == data.getEmpoloyeesList().get(0).getCardID())){
+                LinearLayout linearLayout = findViewById(R.id.adminConsole);
+                linearLayout.setVisibility(View.GONE);
+            }
+        }
 
         initPerson(gridLearners, data.getLearnersList());
         initPerson(gridParents, data.getParentsList());
@@ -56,10 +65,32 @@ public class EJournalActivity extends AppCompatActivity {
             Intent intent = new Intent(EJournalActivity.this, AccountActivity.class);
             startActivity(intent);
         });
+
+        findViewById(R.id.tree).setOnClickListener(view -> {
+            Intent intent = new Intent(EJournalActivity.this, TreeActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.add_school).setOnClickListener(view -> {
+            startObjectIntent("school");
+        });
+
+        findViewById(R.id.add_class).setOnClickListener(view -> {
+            startObjectIntent("class");
+        });
+
+        findViewById(R.id.add_elective).setOnClickListener(view -> {
+            startObjectIntent("elective");
+        });
+
+        findViewById(R.id.add_sections).setOnClickListener(view -> {
+            startObjectIntent("sections");
+        });
     }
 
     private void init(){
         data = Data.getInstance();
+        user = data.getUser();
         gridLearners = findViewById(R.id.gridLearners);
         gridParents = findViewById(R.id.gridParents);
         gridTeachers = findViewById(R.id.gridTeachers);
@@ -74,17 +105,13 @@ public class EJournalActivity extends AppCompatActivity {
         grid.setColumnCount(1); // Устанавливаем количество столбцов в GridLayout (WIDTH - константа)
 
         for (Person person : arrayList) {
-            // Создаем новый TextView
-            TextView textView = new TextView(getApplicationContext());
-            textView.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
+            addTextView();
 
-            // Проверяем тип персоны
-            SpannableString spanString = new SpannableString(person.getFullName() + ", Phone: " + person.getPhone()); //т.к. есть у всех
+            //Выделяем жирным только часть текста
+            SpannableString spanString = new SpannableString(person.getFullName() + ", Phone: " + person.getPhone());
             spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             String info = "", type = "";
+            // Проверяем тип персоны
             if (person instanceof Learner) {
                 Learner learner = (Learner) person;
                 type = "Learner: ";
@@ -101,7 +128,7 @@ public class EJournalActivity extends AppCompatActivity {
                 type = "Employee: ";
                 info = ", Card ID: " + employee.getCardID() + ", Position: " + employee.getPosition();
             } else Log.d("MyLog", "The object type is not being processed");
-            textView.setText(TextUtils.concat(type, spanString, info));
+            textView.setText(TextUtils.concat(type + " Full name: ", spanString, info));
 
             // Устанавливаем размер текста
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
@@ -109,6 +136,20 @@ public class EJournalActivity extends AppCompatActivity {
             // Добавляем TextView в GridLayout
             grid.addView(textView);
         }
+    }
+
+    private void addTextView(){
+        textView = new TextView(getApplicationContext());
+        textView.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+    }
+
+    private void startObjectIntent(String string){
+        Intent intent = new Intent(EJournalActivity.this, AddObjectActivity.class);
+        intent.putExtra("object", string);
+        startActivity(intent);
     }
 
 }

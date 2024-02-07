@@ -78,4 +78,6 @@
 
     </LinearLayout>
 
+    <include layout="@layout/admin_console"></include>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

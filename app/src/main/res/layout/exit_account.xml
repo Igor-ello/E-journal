@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-        <TextView
+        <ImageView
             android:id="@+id/account"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/account_box"
+            android:src="@drawable/account_box"
             android:layout_marginStart="10dp">
-        </TextView>
+        </ImageView>
     </LinearLayout>
 
     <LinearLayout
@@ -27,12 +27,12 @@
         android:layout_weight="1"
         android:gravity="end">
 
-        <TextView
+        <ImageView
             android:id="@+id/exit"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/exit_to_app"
+            android:src="@drawable/exit_to_app"
             android:layout_marginEnd="10dp">
-        </TextView>
+        </ImageView>
     </LinearLayout>
 </LinearLayout>

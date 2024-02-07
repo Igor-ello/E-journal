@@ -22,7 +22,7 @@ public class Data {
     private final ArrayList<Section> sectionsList;
     private final ArrayList<Elective> electivesList;
     private final ArrayList<Class> classesList;
-    private final School school;
+    private final ArrayList<School> schoolsList;
     private final String[] persons;
     private Person user;
     private ArrayList<Parent> parentArrayList;
@@ -71,6 +71,7 @@ public class Data {
 
         //Empoloyees
         empoloyeesList = new ArrayList<>();
+        empoloyeesList.add(new Employee("********* ******* ********", 9999999999L, 1, "Admin"));
         empoloyeesList.add(new Employee("Николаева Марина Александровна", 9894567890L, 20001, "Администратор"));
         empoloyeesList.add(new Employee("Сидоров Алексей Владимирович", 9896543210L, 20002, "Уборщик"));
         empoloyeesList.add(new Employee("Кузнецова Татьяна Петровна", 9891234567L, 20003, "Кухарка"));
@@ -88,11 +89,12 @@ public class Data {
         classesList.add(new Class("I205", teachersList.get(2), new ArrayList<>(Arrays.asList(learnersList.get(0), learnersList.get(1), learnersList.get(2), learnersList.get(3), learnersList.get(4), learnersList.get(5)))));
 
         //School
-        school = new School(empoloyeesList, teachersList, learnersList,
+        schoolsList = new ArrayList<>();
+        schoolsList.add( new School(empoloyeesList, teachersList, learnersList,
                 "1-я Напрудная ул., дом 13, Москва, 129345",
                 "Государственное бюджетное общеобразовательное учреждение города Москвы " +
                         "\"Многопрофильная школа №1955\"",
-                classesList, electivesList, sectionsList);
+                classesList, electivesList, sectionsList));
 
         persons = new String[]{"Learner", "Parent", "Teacher", "Employee"};
         parentArrayList = new ArrayList<>();
@@ -123,12 +125,28 @@ public class Data {
         return null;
     }
 
+    public ArrayList<String> getLearnersFullNames(){
+        ArrayList<String> learners = new ArrayList<>();
+        for (Learner learner: learnersList) {
+            learners.add(learner.getFullName());
+        }
+        return learners;
+    }
+
     public ArrayList<String> getParentsFullNames(){
         ArrayList<String> parents = new ArrayList<>();
         for (Parent parent: parentsList) {
             parents.add(parent.getFullName());
         }
         return parents;
+    }
+
+    public ArrayList<String> getTeachersFullNames(){
+        ArrayList<String> teachers = new ArrayList<>();
+        for (Teacher teacher: teachersList) {
+            teachers.add(teacher.getFullName());
+        }
+        return teachers;
     }
 
     public Learner getLearnerByParent(Parent parent){
@@ -176,8 +194,8 @@ public class Data {
         return classesList;
     }
 
-    public School getSchool() {
-        return school;
+    public ArrayList<School> getSchoolsList() {
+        return schoolsList;
     }
 
     public String[] getPersons() {
