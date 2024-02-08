@@ -4,6 +4,7 @@ import static android.text.InputType.TYPE_CLASS_NUMBER;
 import static android.text.InputType.TYPE_CLASS_TEXT;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -23,8 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.R;
-import com.obsessed.e_journal.School.Learner;
-import com.obsessed.e_journal.School.Teacher;
 
 import java.util.ArrayList;
 
@@ -32,13 +31,18 @@ public class AddObjectActivity extends AppCompatActivity {
     Data data;
     String object;
     ArrayList<EditText> editTextArrayList;
-    ArrayList<Spinner> spinnertArrayList;
+    ArrayList<EditText> setEditTextArrayList;
+    ArrayList<ArrayList<Spinner>> spinnerArrayList;
+    ArrayList<Spinner> spinnerArray;
+    ArrayList<LinearLayout> linearLayoutArrayList;
     GridLayout gridLayout;
     TextView header, textView;
     EditText editText;
-    LinearLayout linearLayout;
+    LinearLayout globalLinearLayout, linearLayout;
     Spinner spinner;
     Button button;
+    int countSetButton, countSetLinearLayout;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,22 +63,71 @@ public class AddObjectActivity extends AppCompatActivity {
         findViewById(R.id.back).setOnClickListener(view -> {
             finish();
         });
+
+        findViewById(R.id.save).setOnClickListener(view -> {
+            finish();
+        });
     }
 
     private void init(){
         data = Data.getInstance();
+
         editTextArrayList = new ArrayList<>();
-        spinnertArrayList = new ArrayList<>();
+        setEditTextArrayList = new ArrayList<>();
+        spinnerArrayList = new ArrayList<>();
+        spinnerArray = new ArrayList<>();
+        linearLayoutArrayList = new ArrayList<>();
+
         Intent intent = getIntent();
         object = (String) intent.getExtras().get("object");
         gridLayout = findViewById(R.id.grid);
+        countSetButton = 0;
+        countSetLinearLayout = 0;
 
         header = findViewById(R.id.header);
         header.setText("Add " + object);
     }
 
     private void addSchoolFields(){
+        createArrayListFields("Employees", data.getEmployeesFullNames());
+        createArrayListFields("Teachers", data.getTeachersFullNames());
+        createArrayListFields("Learners", data.getLearnersFullNames());
 
+        createLinearLayout(new String[]{"TextView", "EditText"});
+        textView.setText("Address: ");
+        editText.setInputType(TYPE_CLASS_TEXT);
+
+        createLinearLayout(new String[]{"TextView", "EditText"});
+        textView.setText("Name: ");
+        editText.setInputType(TYPE_CLASS_TEXT);
+
+        createArrayListFields("Classes", data.getClassesNames());
+        createArrayListFields("Electives", data.getElectivesNames());
+        createArrayListFields("Sections", data.getSectionsNames());
+    }
+
+    private void createArrayListFields(String text, ArrayList arrayList) {
+        createLinearLayout(new String[]{"TextView", "EditText", "Button", "LinearLayout"});
+        textView.setText( text + " (max " + arrayList.size() + "): ");
+        editText.setInputType(TYPE_CLASS_NUMBER);
+        setEditTextArrayList.add(editText);
+
+        button.setOnClickListener(view -> {
+
+            int numberOfSubjects = Integer.parseInt(String.valueOf(setEditTextArrayList.get(view.getId()).getText()));
+            if(numberOfSubjects > data.getLearnersList().size())
+                numberOfSubjects = data.getLearnersList().size();
+
+            spinnerArray = new ArrayList<>();
+            linearLayout = (LinearLayout) linearLayoutArrayList.get(Integer.parseInt((String) view.getTag())).getChildAt(3);
+            linearLayout.removeAllViews();
+            for (int i = 0; i < numberOfSubjects; i++) {
+                spinner = newSpinner(arrayList, 0);
+                spinnerArray.add(spinner);
+                linearLayout.addView(spinner);
+            }
+            spinnerArrayList.add(spinnerArray);
+        });
     }
 
     private void addClassFields(){
@@ -102,89 +155,92 @@ public class AddObjectActivity extends AppCompatActivity {
     }
 
     private void addLearnersAndTeacher(){
-        createLinearLayout(new String[]{"TextView", "Spinner"}, data.getTeachersFullNames());
+        createLinearLayout(new String[]{"TextView", "Spinner"}, data.getTeachersFullNames(), 0);
         textView.setText("Class teacher: ");
 
-        createLinearLayout(new String[]{"TextView", "EditText", "Button"});
-        textView.setText("Number of learners: ");
-        editText.setInputType(TYPE_CLASS_NUMBER);
-
-        button.setOnClickListener(view -> {
-            textView.setText("Learners: ");
-            for (int i=0; i < Integer.parseInt(String.valueOf(editText.getText())); i++){
-                createLinearLayout(new String[]{"Spinner"}, data.getLearnersFullNames());
-            }
-        });
+        createArrayListFields("Learners", data.getLearnersFullNames());
     }
 
+    //LinearLayout
     private void createLinearLayout(String[] types){
-        newLinearLayout();
+        globalLinearLayout = newLinearLayout();
         for (String type: types) {
             if(type.equals("TextView")){
-                newTextView();
-                linearLayout.addView(textView);
+                globalLinearLayout.addView(newTextView());
             } else if(type.equals("EditText")){
-                newEditText();
-                linearLayout.addView(editText);
+                globalLinearLayout.addView(newEditText());
             } else if(type.equals("Button")){
-                newButton();
-                linearLayout.addView(button);
+                globalLinearLayout.addView(newButton());
+            } else if(type.equals("LinearLayout")){
+                globalLinearLayout.addView(newLinearLayout());
             }
         }
-        gridLayout.addView(linearLayout);
+
+        globalLinearLayout.setId(countSetLinearLayout);
+        countSetLinearLayout++;
+
+        linearLayoutArrayList.add(globalLinearLayout);
+        gridLayout.addView(globalLinearLayout);
     }
 
-    private void createLinearLayout(String[] types, ArrayList<?> objects){
-        newLinearLayout();
+    private void createLinearLayout(String[] types, ArrayList<?> objects, int index){
+        globalLinearLayout = newLinearLayout();
         for (String type: types) {
             if(type.equals("TextView")){
-                newTextView();
-                linearLayout.addView(textView);
+                globalLinearLayout.addView(newTextView());
             } else if(type.equals("EditText")){
-                newEditText();
-                linearLayout.addView(editText);
+                globalLinearLayout.addView(newEditText());
             } else if(type.equals("Button")){
-                newButton();
-                linearLayout.addView(button);
+                globalLinearLayout.addView(newButton());
+            } else if(type.equals("LinearLayout")){
+                globalLinearLayout.addView(newLinearLayout());
             } else if(type.equals("Spinner")) {
-                newSpinner(objects);
-                linearLayout.addView(spinner);
-//                if(objects.get(0) instanceof Teacher
-//                        || objects.get(0) instanceof Learner){
-//                }
+                globalLinearLayout.addView(newSpinner(objects, index));
             }
         }
-        gridLayout.addView(linearLayout);
+
+        globalLinearLayout.setId(countSetLinearLayout);
+        countSetLinearLayout++;
+
+        linearLayoutArrayList.add(globalLinearLayout);
+        gridLayout.addView(globalLinearLayout);
     }
 
-    private void newTextView(){
+    private TextView newTextView(){
         textView = new TextView(getApplicationContext());
         textView.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        return textView;
     }
 
-    private void newEditText(){
+    private EditText newEditText(){
         editText = new EditText(getApplicationContext());
         editText.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
         editTextArrayList.add(editText);
+        return editText;
     }
 
-    private void newButton(){
+    private Button newButton(){
         button = new Button(getApplicationContext());
         button.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
         button.setText("Set");
+
+        button.setId(countSetButton);
+        countSetButton++;
+        button.setTag(String.valueOf(countSetLinearLayout));
+        return button;
     }
 
-    private void newLinearLayout(){
+    private LinearLayout newLinearLayout(){
         linearLayout = new LinearLayout(getApplicationContext());
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -192,12 +248,13 @@ public class AddObjectActivity extends AppCompatActivity {
         ));
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         linearLayout.setGravity(Gravity.CENTER);
+        return linearLayout;
     }
 
-    private void newSpinner(ArrayList<?> objects) {
+    private Spinner newSpinner(ArrayList<?> objects, int index) {
         Log.d("MyLog", String.valueOf(objects));
         spinner = new Spinner(getApplicationContext());
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,
+        adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, objects);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -213,6 +270,7 @@ public class AddObjectActivity extends AppCompatActivity {
             }
         };
         spinner.setOnItemSelectedListener(itemSelectedListener);
-        spinnertArrayList.add(spinner);
+        spinner.setSelection(index);
+        return spinner;
     }
 }

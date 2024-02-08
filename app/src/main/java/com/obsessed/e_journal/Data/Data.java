@@ -149,6 +149,39 @@ public class Data {
         return teachers;
     }
 
+    public ArrayList<String> getEmployeesFullNames(){
+        ArrayList<String> employees = new ArrayList<>();
+        for (Employee employee: empoloyeesList) {
+            employees.add(employee.getFullName());
+        }
+        return employees;
+    }
+
+    public ArrayList<String> getClassesNames(){
+        ArrayList<String> classes = new ArrayList<>();
+        for (Class class_my: classesList) {
+            classes.add(class_my.getNumber());
+        }
+        return classes;
+    }
+
+    public ArrayList<String> getSectionsNames(){
+        ArrayList<String> sections = new ArrayList<>();
+        for (Section section: sectionsList) {
+            sections.add(section.getName());
+        }
+        return sections;
+    }
+
+    public ArrayList<String> getElectivesNames(){
+        ArrayList<String> electives = new ArrayList<>();
+        for (Elective elective: electivesList) {
+            electives.add(elective.getAcademicSubject());
+        }
+        return electives;
+    }
+
+
     public Learner getLearnerByParent(Parent parent){
         for (Learner learner: learnersList) {
             if(learner.getParents().get(0) == parent || learner.getParents().get(1) == parent)
@@ -165,6 +198,7 @@ public class Data {
             }
         }
     }
+
 
     public ArrayList<Parent> getParentsList() {
         return parentsList;
