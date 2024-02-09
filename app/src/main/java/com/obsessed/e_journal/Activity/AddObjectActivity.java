@@ -3,8 +3,8 @@ package com.obsessed.e_journal.Activity;
 import static android.text.InputType.TYPE_CLASS_NUMBER;
 import static android.text.InputType.TYPE_CLASS_TEXT;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -22,8 +22,15 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.obsessed.e_journal.AddObjectToList;
 import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.R;
+import com.obsessed.e_journal.School.Class;
+import com.obsessed.e_journal.School.Elective;
+import com.obsessed.e_journal.School.Learner;
+import com.obsessed.e_journal.School.Person;
+import com.obsessed.e_journal.School.School;
+import com.obsessed.e_journal.School.Section;
 
 import java.util.ArrayList;
 
@@ -56,8 +63,8 @@ public class AddObjectActivity extends AppCompatActivity {
             addClassFields();
         } else if (object.equals("elective")) {
             addElectiveFields();
-        } else if (object.equals("sections")) {
-            addSectionsFields();
+        } else if (object.equals("section")) {
+            addSectionFields();
         } else Log.d("MyLog", "The object type is not being processed");
 
         findViewById(R.id.back).setOnClickListener(view -> {
@@ -65,8 +72,45 @@ public class AddObjectActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.save).setOnClickListener(view -> {
-            finish();
+            AddObjectToList addObjectToList = AddObjectToList.getInstance();
+            if(object.equals("school")) {
+                //addObjectToList.addEntrySchoolToList();
+            } else if (object.equals("class")) {
+                Log.d("MyLog", spinnerArrayList.size() + " ");
+                Log.d("MyLog", spinnerArrayList.get(0).size() + " " + spinnerArrayList.get(1).size());
+                addObjectToList.addEntryClassToList(
+                        editTextArrayList.get(0).getText().toString(),
+                        data.getTeachersList().get(spinnerArrayList.get(0).get(0).getSelectedItemPosition()),
+                        getSpinnerPosName()
+                );
+            } else if (object.equals("elective")) {
+                addObjectToList.addEntryElectiveToList(
+                        editTextArrayList.get(0).getText().toString(),
+                        data.getTeachersList().get(spinnerArrayList.get(0).get(0).getSelectedItemPosition()),
+                        getSpinnerPosName()
+                );
+            } else if (object.equals("section")) {
+                addObjectToList.addEntrySectionToList(
+                        editTextArrayList.get(0).getText().toString(),
+                        data.getTeachersList().get(spinnerArrayList.get(0).get(0).getSelectedItemPosition()),
+                        getSpinnerPosName()
+                );
+            } else Log.d("MyLog", "The object type is not being processed");
+
+
+            Intent intent = new Intent(AddObjectActivity.this, EJournalActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
+    }
+
+    private ArrayList<Learner> getSpinnerPosName(){
+        //TODO другие типы
+        ArrayList<Learner> learners = new ArrayList<>();
+        for (Spinner spinner1: spinnerArrayList.get(1)) {
+            learners.add(data.getLearnersList().get(spinner1.getSelectedItemPosition()));
+        }
+        return learners;
     }
 
     private void init(){
@@ -106,6 +150,7 @@ public class AddObjectActivity extends AppCompatActivity {
         createArrayListFields("Sections", data.getSectionsNames());
     }
 
+    @SuppressLint("SetTextI18n")
     private void createArrayListFields(String text, ArrayList arrayList) {
         createLinearLayout(new String[]{"TextView", "EditText", "Button", "LinearLayout"});
         textView.setText( text + " (max " + arrayList.size() + "): ");
@@ -126,6 +171,7 @@ public class AddObjectActivity extends AppCompatActivity {
                 spinnerArray.add(spinner);
                 linearLayout.addView(spinner);
             }
+            Log.d("MyLog", "spinnerArrayList.add(spinnerArray);");
             spinnerArrayList.add(spinnerArray);
         });
     }
@@ -146,7 +192,7 @@ public class AddObjectActivity extends AppCompatActivity {
         addLearnersAndTeacher();
     }
 
-    private void addSectionsFields(){
+    private void addSectionFields(){
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Name: ");
         editText.setInputType(TYPE_CLASS_TEXT);
@@ -196,6 +242,10 @@ public class AddObjectActivity extends AppCompatActivity {
                 globalLinearLayout.addView(newLinearLayout());
             } else if(type.equals("Spinner")) {
                 globalLinearLayout.addView(newSpinner(objects, index));
+
+                spinnerArray = new ArrayList<>();
+                spinnerArray.add(spinner);
+                spinnerArrayList.add(spinnerArray);
             }
         }
 

@@ -1,5 +1,7 @@
 package com.obsessed.e_journal.Data;
 
+import android.util.Log;
+
 import com.obsessed.e_journal.School.Class;
 import com.obsessed.e_journal.School.Elective;
 import com.obsessed.e_journal.School.Employee;
@@ -252,6 +254,20 @@ public class Data {
     public void addEntryEmpoloyeesList(Employee employee) {
         empoloyeesList.add(employee);
     }
+    public void addEntrySchoolList(School school) {
+        schoolsList.add(school);
+    }
+    public void addEntryClassList(Class cls) {
+        classesList.add(cls);
+    }
+    public void addEntryElectiveList(Elective elective) {
+        electivesList.add(elective);
+    }
+    public void addEntrySectionList(Section section) {
+        sectionsList.add(section);
+    }
+
+
 
     public Person getUser() {
         return user;

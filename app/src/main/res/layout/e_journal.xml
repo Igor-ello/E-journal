@@ -65,6 +65,46 @@
                     style="@style/EJournalGridStyle">
                 </GridLayout>
 
+                <TextView
+                    style="@style/EJournalTvStyle"
+                    android:text="All schools">
+                </TextView>
+
+                <GridLayout
+                    android:id="@+id/gridSchools"
+                    style="@style/EJournalGridStyle">
+                </GridLayout>
+
+                <TextView
+                    style="@style/EJournalTvStyle"
+                    android:text="All classes">
+                </TextView>
+
+                <GridLayout
+                    android:id="@+id/gridClasses"
+                    style="@style/EJournalGridStyle">
+                </GridLayout>
+
+                <TextView
+                    style="@style/EJournalTvStyle"
+                    android:text="All electives">
+                </TextView>
+
+                <GridLayout
+                    android:id="@+id/gridElectives"
+                    style="@style/EJournalGridStyle">
+                </GridLayout>
+
+                <TextView
+                    style="@style/EJournalTvStyle"
+                    android:text="All sections">
+                </TextView>
+
+                <GridLayout
+                    android:id="@+id/gridSections"
+                    style="@style/EJournalGridStyle">
+                </GridLayout>
+
 
                 <TextView
                     android:layout_width="wrap_content"
