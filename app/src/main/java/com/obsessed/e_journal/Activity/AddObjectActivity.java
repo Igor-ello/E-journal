@@ -27,10 +27,13 @@ import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Class;
 import com.obsessed.e_journal.School.Elective;
+import com.obsessed.e_journal.School.Employee;
 import com.obsessed.e_journal.School.Learner;
+import com.obsessed.e_journal.School.Parent;
 import com.obsessed.e_journal.School.Person;
 import com.obsessed.e_journal.School.School;
 import com.obsessed.e_journal.School.Section;
+import com.obsessed.e_journal.School.Teacher;
 
 import java.util.ArrayList;
 
@@ -74,26 +77,38 @@ public class AddObjectActivity extends AppCompatActivity {
         findViewById(R.id.save).setOnClickListener(view -> {
             AddObjectToList addObjectToList = AddObjectToList.getInstance();
             if(object.equals("school")) {
-                //addObjectToList.addEntrySchoolToList();
+                for (ArrayList<Spinner> lists: spinnerArrayList){
+                    for (Spinner list: lists){
+                        Log.d("MyLog", list.toString());
+                    }
+                }
+                addObjectToList.addEntrySchoolToList(
+                        (ArrayList<Employee>) getSpinnerPosName("Employee", spinnerArrayList.get(0)),
+                        (ArrayList<Teacher>) getSpinnerPosName("Teacher", spinnerArrayList.get(1)),
+                        (ArrayList<Learner>) getSpinnerPosName("Learner", spinnerArrayList.get(2)),
+                        editTextArrayList.get(0).getText().toString(),
+                        editTextArrayList.get(1).getText().toString(),
+                        (ArrayList<Class>) getSpinnerPosName("Class", spinnerArrayList.get(3)),
+                        (ArrayList<Elective>) getSpinnerPosName("Elective", spinnerArrayList.get(4)),
+                        (ArrayList<Section>) getSpinnerPosName("Section", spinnerArrayList.get(5))
+                );
             } else if (object.equals("class")) {
-                Log.d("MyLog", spinnerArrayList.size() + " ");
-                Log.d("MyLog", spinnerArrayList.get(0).size() + " " + spinnerArrayList.get(1).size());
                 addObjectToList.addEntryClassToList(
                         editTextArrayList.get(0).getText().toString(),
                         data.getTeachersList().get(spinnerArrayList.get(0).get(0).getSelectedItemPosition()),
-                        getSpinnerPosName()
+                        (ArrayList<Learner>) getSpinnerPosName("Learner", spinnerArrayList.get(1))
                 );
             } else if (object.equals("elective")) {
                 addObjectToList.addEntryElectiveToList(
                         editTextArrayList.get(0).getText().toString(),
                         data.getTeachersList().get(spinnerArrayList.get(0).get(0).getSelectedItemPosition()),
-                        getSpinnerPosName()
+                        (ArrayList<Learner>) getSpinnerPosName("Learner", spinnerArrayList.get(1))
                 );
             } else if (object.equals("section")) {
                 addObjectToList.addEntrySectionToList(
                         editTextArrayList.get(0).getText().toString(),
                         data.getTeachersList().get(spinnerArrayList.get(0).get(0).getSelectedItemPosition()),
-                        getSpinnerPosName()
+                        (ArrayList<Learner>) getSpinnerPosName("Learner", spinnerArrayList.get(1))
                 );
             } else Log.d("MyLog", "The object type is not being processed");
 
@@ -104,13 +119,44 @@ public class AddObjectActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<Learner> getSpinnerPosName(){
-        //TODO другие типы
-        ArrayList<Learner> learners = new ArrayList<>();
-        for (Spinner spinner1: spinnerArrayList.get(1)) {
-            learners.add(data.getLearnersList().get(spinner1.getSelectedItemPosition()));
-        }
-        return learners;
+    private ArrayList<?> getSpinnerPosName(String type, ArrayList<Spinner> arrayList){
+        if (type.equals("Learner")){
+            ArrayList<Person> object = new ArrayList<>();
+            for (Spinner spinner1: arrayList) {
+                object.add(data.getLearnersList().get(spinner1.getSelectedItemPosition()));
+            }
+            return object;
+        } else if (type.equals("Teacher")) {
+            ArrayList<Person> object = new ArrayList<>();
+            for (Spinner spinner1: arrayList) {
+                object.add(data.getTeachersList().get(spinner1.getSelectedItemPosition()));
+            }
+            return object;
+        } else if (type.equals("Employee")) {
+            ArrayList<Person> object = new ArrayList<>();
+            for (Spinner spinner1: arrayList) {
+                object.add(data.getEmpoloyeesList().get(spinner1.getSelectedItemPosition()));
+            }
+            return object;
+        } else if (type.equals("Class")) {
+            ArrayList<Class> object = new ArrayList<>();
+            for (Spinner spinner1: arrayList) {
+                object.add(data.getClassesList().get(spinner1.getSelectedItemPosition()));
+            }
+            return object;
+        } else if (type.equals("Elective")) {
+            ArrayList<Elective> object = new ArrayList<>();
+            for (Spinner spinner1: arrayList) {
+                object.add(data.getElectivesList().get(spinner1.getSelectedItemPosition()));
+            }
+            return object;
+        } else if (type.equals("Section")) {
+            ArrayList<Section> object = new ArrayList<>();
+            for (Spinner spinner1: arrayList) {
+                object.add(data.getSectionsList().get(spinner1.getSelectedItemPosition()));
+            }
+            return object;
+        } else return null;
     }
 
     private void init(){
@@ -140,10 +186,13 @@ public class AddObjectActivity extends AppCompatActivity {
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Address: ");
         editText.setInputType(TYPE_CLASS_TEXT);
+        editTextArrayList.add(editText);
+
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Name: ");
         editText.setInputType(TYPE_CLASS_TEXT);
+        editTextArrayList.add(editText);
 
         createArrayListFields("Classes", data.getClassesNames());
         createArrayListFields("Electives", data.getElectivesNames());
@@ -167,7 +216,7 @@ public class AddObjectActivity extends AppCompatActivity {
             linearLayout = (LinearLayout) linearLayoutArrayList.get(Integer.parseInt((String) view.getTag())).getChildAt(3);
             linearLayout.removeAllViews();
             for (int i = 0; i < numberOfSubjects; i++) {
-                spinner = newSpinner(arrayList, 0);
+                spinner = newSpinner(arrayList, i);
                 spinnerArray.add(spinner);
                 linearLayout.addView(spinner);
             }
@@ -180,6 +229,7 @@ public class AddObjectActivity extends AppCompatActivity {
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Number: ");
         editText.setInputType(TYPE_CLASS_TEXT);
+        editTextArrayList.add(editText);
 
         addLearnersAndTeacher();
     }
@@ -188,6 +238,7 @@ public class AddObjectActivity extends AppCompatActivity {
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Academic subject: ");
         editText.setInputType(TYPE_CLASS_TEXT);
+        editTextArrayList.add(editText);
 
         addLearnersAndTeacher();
     }
@@ -196,6 +247,7 @@ public class AddObjectActivity extends AppCompatActivity {
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Name: ");
         editText.setInputType(TYPE_CLASS_TEXT);
+        editTextArrayList.add(editText);
 
         addLearnersAndTeacher();
     }
@@ -272,7 +324,6 @@ public class AddObjectActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        editTextArrayList.add(editText);
         return editText;
     }
 

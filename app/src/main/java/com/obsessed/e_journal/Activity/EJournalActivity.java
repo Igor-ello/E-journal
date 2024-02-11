@@ -170,19 +170,28 @@ public class EJournalActivity extends AppCompatActivity {
             if (object instanceof School) {
                 School school = (School) object;
                 type = "School: ";
-                //info = ", Card ID: " + learner.getCardID() + ", Parents: " + learner.getParentsNames();
+                info = "Employees: " + getFullNames("Person", school.getEmployees())
+                        + ", Teachers: " + getFullNames("Person", school.getTeachers())
+                        + ", Learners: " + getFullNames("Person", school.getLearners())
+                        + ", Address: " + school.getAddress() + "Name: " + school.getName()
+                        + ", Classes: " + getFullNames("Class", school.getClasses())
+                        + ", Electives: " + getFullNames("Elective", school.getElectives())
+                        + ", Section: " + getFullNames("Section", school.getSections());
             } else if (object instanceof Class) {
                 Class cls = (Class) object;
                 type = "Class: ";
-                info = "Number: " + cls.getNumber() + ", Teacher: " + cls.getClassTeacher().getFullName() + ", Learners: " + getFullNames(cls.getLearners());
+                info = "Number: " + cls.getNumber() + ", Teacher: " + cls.getClassTeacher().getFullName()
+                        + ", Learners: " + getFullNames("Person", cls.getLearners());
             }else if (object instanceof Elective) {
                 Elective elective = (Elective) object;
                 type = "Elective: ";
-                info = "Number: " + elective.getAcademicSubject() + ", Teacher: " + elective.getClassTeacher().getFullName() + ", Learners: " + getFullNames(elective.getLearners());
+                info = "Number: " + elective.getAcademicSubject() + ", Teacher: " + elective.getClassTeacher().getFullName()
+                        + ", Learners: " + getFullNames("Person", elective.getLearners());
             } else if (object instanceof Section) {
                 Section section = (Section) object;
                 type = "Section: ";
-                info = "Number: " + section.getName() + ", Teacher: " + section.getClassTeacher().getFullName() + ", Learners: " + getFullNames(section.getLearners());
+                info = "Number: " + section.getName() + ", Teacher: " + section.getClassTeacher().getFullName()
+                        + ", Learners: " + getFullNames("Person", section.getLearners());
             } else Log.d("MyLog", "The object type is not being processed");
             textView.setText(TextUtils.concat(type, info));
 
@@ -203,11 +212,27 @@ public class EJournalActivity extends AppCompatActivity {
         return textView;
     }
 
-    private ArrayList<String> getFullNames(ArrayList<?> arrayList){
-        namesArrayList = new ArrayList<>();
-        for (Object object: arrayList) {
-            Person person = (Person) object;
-            namesArrayList.add(person.getFullName());
+    private ArrayList<String> getFullNames(String type, ArrayList<?> arrayList){
+        if(type.equals("Person")) {
+            namesArrayList = new ArrayList<>();
+            for (Object object: arrayList) {
+                namesArrayList.add(((Person) object).getFullName());
+            }
+        } else if (type.equals("Class")) {
+            namesArrayList = new ArrayList<>();
+            for (Object object: arrayList) {
+                namesArrayList.add(((Class) object).getNumber());
+            }
+        } else if (type.equals("Elective")) {
+            namesArrayList = new ArrayList<>();
+            for (Object object: arrayList) {
+                namesArrayList.add(((Elective) object).getAcademicSubject());
+            }
+        } else if (type.equals("Section")) {
+            namesArrayList = new ArrayList<>();
+            for (Object object : arrayList) {
+                namesArrayList.add(((Section) object).getName());
+            }
         }
         return namesArrayList;
     }
