@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.obsessed.e_journal.Data.Data;
+import com.obsessed.e_journal.Data.DataFunctions;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Employee;
 import com.obsessed.e_journal.School.Learner;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 
 public class AccountActivity extends AppCompatActivity {
     Data data;
+    DataFunctions dataFunctions;
     Person user;
     ArrayList<EditText> editTextArrayList;
     TextView textView;
@@ -57,7 +59,9 @@ public class AccountActivity extends AppCompatActivity {
 
     private void init(){
         data = Data.getInstance();
+        dataFunctions = DataFunctions.getInstance();
         user = data.getUser();
+
         gridLayout = findViewById(R.id.grid);
         editTextArrayList = new ArrayList<>();
 
@@ -95,7 +99,7 @@ public class AccountActivity extends AppCompatActivity {
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Learner: ");
-        Learner learner = data.getLearnerByParent((Parent) user);
+        Learner learner = dataFunctions.getLearnerByParent((Parent) user);
         if(learner != null)
             editText.setText(learner.getFullName());
     }

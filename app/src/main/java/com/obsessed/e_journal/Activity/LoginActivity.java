@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.obsessed.e_journal.Data.Data;
+import com.obsessed.e_journal.Data.DataFunctions;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Person;
 
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText editText;
     int positionSelected = -1;
     Data data;
+    DataFunctions dataFunctions;
     String[] persons;
     boolean isParent;
 
@@ -83,8 +85,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private  void init(){
         data = Data.getInstance();
+        dataFunctions = DataFunctions.getInstance();
         persons = data.getPersons();
-        data.setParentArrayList(new ArrayList<>());
     }
 
     private boolean checkPersonID(){
@@ -98,20 +100,20 @@ public class LoginActivity extends AppCompatActivity {
             //проверка на вход
             switch (positionSelected){
                 case 0: {   //Learner
-                    person = data.getLearnerByID(id);
+                    person = dataFunctions.getLearnerByID(id);
                     break;
                 }
                 case 1: {   //Parent
                     isParent = true;
-                    person = data.getLearnerByID(id);
+                    person = dataFunctions.getLearnerByID(id);
                     break;
                 }
                 case 2: {   //Teacher
-                    person = data.getTeacherByID(id);
+                    person = dataFunctions.getTeacherByID(id);
                     break;
                 }
                 case 3: {   //Employee
-                    person = data.getEmployeeByID(id);
+                    person = dataFunctions.getEmployeeByID(id);
                     break;
                 }
                 default:
@@ -122,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
             if(person != null){
                 isIdCorrect = true;
                 if(isParent){
-                    data.setParentsByLearnerID(id);
+                    dataFunctions.setParentsByLearnerID(id);
                     if(data.getParentArrayList() != null)
                         data.setUser(data.getParentArrayList().get(0));
                 } else data.setUser(person);

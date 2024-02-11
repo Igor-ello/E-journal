@@ -102,105 +102,6 @@ public class Data {
         parentArrayList = new ArrayList<>();
     }
 
-    public Learner getLearnerByID(int ID) {
-        for (Learner learner : learnersList) {
-            if (learner.getCardID() == ID) {
-                return learner;
-            }
-        }
-        return null;
-    }
-    public Teacher getTeacherByID(int ID) {
-        for (Teacher teacher : teachersList) {
-            if (teacher.getCardID() == ID) {
-                return teacher;
-            }
-        }
-        return null;
-    }
-    public Employee getEmployeeByID(int ID) {
-        for (Employee employee : empoloyeesList) {
-            if (employee.getCardID() == ID) {
-                return employee;
-            }
-        }
-        return null;
-    }
-
-    public ArrayList<String> getLearnersFullNames(){
-        ArrayList<String> learners = new ArrayList<>();
-        for (Learner learner: learnersList) {
-            learners.add(learner.getFullName());
-        }
-        return learners;
-    }
-
-    public ArrayList<String> getParentsFullNames(){
-        ArrayList<String> parents = new ArrayList<>();
-        for (Parent parent: parentsList) {
-            parents.add(parent.getFullName());
-        }
-        return parents;
-    }
-
-    public ArrayList<String> getTeachersFullNames(){
-        ArrayList<String> teachers = new ArrayList<>();
-        for (Teacher teacher: teachersList) {
-            teachers.add(teacher.getFullName());
-        }
-        return teachers;
-    }
-
-    public ArrayList<String> getEmployeesFullNames(){
-        ArrayList<String> employees = new ArrayList<>();
-        for (Employee employee: empoloyeesList) {
-            employees.add(employee.getFullName());
-        }
-        return employees;
-    }
-
-    public ArrayList<String> getClassesNames(){
-        ArrayList<String> classes = new ArrayList<>();
-        for (Class class_my: classesList) {
-            classes.add(class_my.getNumber());
-        }
-        return classes;
-    }
-
-    public ArrayList<String> getSectionsNames(){
-        ArrayList<String> sections = new ArrayList<>();
-        for (Section section: sectionsList) {
-            sections.add(section.getName());
-        }
-        return sections;
-    }
-
-    public ArrayList<String> getElectivesNames(){
-        ArrayList<String> electives = new ArrayList<>();
-        for (Elective elective: electivesList) {
-            electives.add(elective.getAcademicSubject());
-        }
-        return electives;
-    }
-
-
-    public Learner getLearnerByParent(Parent parent){
-        for (Learner learner: learnersList) {
-            if(learner.getParents().get(0) == parent || learner.getParents().get(1) == parent)
-                return learner;
-        }
-        return null;
-    }
-
-    public void setParentsByLearnerID(int learner_id){
-        for(Learner learner: learnersList) {
-            if(learner.getCardID() == learner_id){
-                parentArrayList.add(learner.getParents().get(0));
-                parentArrayList.add(learner.getParents().get(1));
-            }
-        }
-    }
-
 
     public ArrayList<Parent> getParentsList() {
         return parentsList;
@@ -254,25 +155,26 @@ public class Data {
     public void addEntryEmpoloyeesList(Employee employee) {
         empoloyeesList.add(employee);
     }
+
     public void addEntrySchoolList(School school) {
         schoolsList.add(school);
     }
+
     public void addEntryClassList(Class cls) {
         classesList.add(cls);
     }
+
     public void addEntryElectiveList(Elective elective) {
         electivesList.add(elective);
     }
+
     public void addEntrySectionList(Section section) {
         sectionsList.add(section);
     }
 
-
-
     public Person getUser() {
         return user;
     }
-
     public void setUser(Person user) {
         this.user = user;
     }
@@ -280,7 +182,6 @@ public class Data {
     public ArrayList<Parent> getParentArrayList() {
         return parentArrayList;
     }
-
     public void setParentArrayList(ArrayList<Parent> parentArrayList) {
         this.parentArrayList = parentArrayList;
     }

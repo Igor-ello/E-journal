@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.obsessed.e_journal.AddObjectToList;
 import com.obsessed.e_journal.Data.Data;
+import com.obsessed.e_journal.Data.DataFunctions;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Class;
 import com.obsessed.e_journal.School.Elective;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 
 public class AddObjectActivity extends AppCompatActivity {
     Data data;
+    DataFunctions dataFunctions;
     String object;
     ArrayList<EditText> editTextArrayList;
     ArrayList<EditText> setEditTextArrayList;
@@ -161,6 +163,7 @@ public class AddObjectActivity extends AppCompatActivity {
 
     private void init(){
         data = Data.getInstance();
+        dataFunctions = DataFunctions.getInstance();
 
         editTextArrayList = new ArrayList<>();
         setEditTextArrayList = new ArrayList<>();
@@ -179,9 +182,9 @@ public class AddObjectActivity extends AppCompatActivity {
     }
 
     private void addSchoolFields(){
-        createArrayListFields("Employees", data.getEmployeesFullNames());
-        createArrayListFields("Teachers", data.getTeachersFullNames());
-        createArrayListFields("Learners", data.getLearnersFullNames());
+        createArrayListFields("Employees", dataFunctions.getEmployeesFullNames());
+        createArrayListFields("Teachers", dataFunctions.getTeachersFullNames());
+        createArrayListFields("Learners", dataFunctions.getLearnersFullNames());
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Address: ");
@@ -194,9 +197,9 @@ public class AddObjectActivity extends AppCompatActivity {
         editText.setInputType(TYPE_CLASS_TEXT);
         editTextArrayList.add(editText);
 
-        createArrayListFields("Classes", data.getClassesNames());
-        createArrayListFields("Electives", data.getElectivesNames());
-        createArrayListFields("Sections", data.getSectionsNames());
+        createArrayListFields("Classes", dataFunctions.getClassesNames());
+        createArrayListFields("Electives", dataFunctions.getElectivesNames());
+        createArrayListFields("Sections", dataFunctions.getSectionsNames());
     }
 
     @SuppressLint("SetTextI18n")
@@ -253,10 +256,10 @@ public class AddObjectActivity extends AppCompatActivity {
     }
 
     private void addLearnersAndTeacher(){
-        createLinearLayout(new String[]{"TextView", "Spinner"}, data.getTeachersFullNames(), 0);
+        createLinearLayout(new String[]{"TextView", "Spinner"}, dataFunctions.getTeachersFullNames(), 0);
         textView.setText("Class teacher: ");
 
-        createArrayListFields("Learners", data.getLearnersFullNames());
+        createArrayListFields("Learners", dataFunctions.getLearnersFullNames());
     }
 
     //LinearLayout

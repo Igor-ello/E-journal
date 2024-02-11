@@ -21,13 +21,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.obsessed.e_journal.AddEntryPersonToList;
 import com.obsessed.e_journal.Data.Data;
+import com.obsessed.e_journal.Data.DataFunctions;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Parent;
 
 import java.util.ArrayList;
 
 public class RegistrationSelectedActivity extends AppCompatActivity {
-
+    Data data;
+    DataFunctions dataFunctions;
     AddEntryPersonToList addEntryPersonToList;
     GridLayout gridLayout;
     LinearLayout linearLayout;
@@ -38,7 +40,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
     ArrayList<Parent> parentArrayList;
     EditText editText;
     String person;
-    Data data;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,6 +98,8 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
 
     private void init(){
         data = Data.getInstance();
+        dataFunctions = DataFunctions.getInstance();
+
         addEntryPersonToList = AddEntryPersonToList.getInstance();
         editTextArrayList = new ArrayList<>();
         gridLayout = findViewById(R.id.grid);
@@ -199,7 +203,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
         ArrayAdapter<String> adapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, data.getParentsFullNames());
+                android.R.layout.simple_spinner_item, dataFunctions.getParentsFullNames());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
