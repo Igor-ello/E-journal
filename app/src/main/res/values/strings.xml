@@ -3,4 +3,5 @@
     <string name="who_are_you">Who are you?</string>
     <string name="header">Header</string>
     <string name="id">Введите ID вашего ребёнка</string>
+    <string name="save">Save</string>
 </resources>

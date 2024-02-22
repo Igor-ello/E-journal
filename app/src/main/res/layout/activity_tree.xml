@@ -23,7 +23,7 @@
                 style="@style/LinearLayoutMainStyle">
 
                 <TextView
-                    style="@style/TextViewHeaderStyle"
+                    style="@style/TextViewLargeStyle"
                     android:text="All learners">
                 </TextView>
 
@@ -33,7 +33,7 @@
                 </GridLayout>
 
                 <TextView
-                    style="@style/TextViewHeaderStyle"
+                    style="@style/TextViewLargeStyle"
                     android:text="All parents">
                 </TextView>
 
@@ -43,7 +43,7 @@
                 </GridLayout>
 
                 <TextView
-                    style="@style/TextViewHeaderStyle"
+                    style="@style/TextViewLargeStyle"
                     android:text="All teachers">
                 </TextView>
 
@@ -53,7 +53,7 @@
                 </GridLayout>
 
                 <TextView
-                    style="@style/TextViewHeaderStyle"
+                    style="@style/TextViewLargeStyle"
                     android:text="All employees">
                 </TextView>
 
@@ -63,7 +63,7 @@
                 </GridLayout>
 
                 <TextView
-                    style="@style/TextViewHeaderStyle"
+                    style="@style/TextViewLargeStyle"
                     android:text="All schools">
                 </TextView>
 
@@ -73,7 +73,7 @@
                 </GridLayout>
 
                 <TextView
-                    style="@style/TextViewHeaderStyle"
+                    style="@style/TextViewLargeStyle"
                     android:text="All classes">
                 </TextView>
 
@@ -83,7 +83,7 @@
                 </GridLayout>
 
                 <TextView
-                    style="@style/TextViewHeaderStyle"
+                    style="@style/TextViewLargeStyle"
                     android:text="All electives">
                 </TextView>
 
@@ -93,7 +93,7 @@
                 </GridLayout>
 
                 <TextView
-                    style="@style/TextViewHeaderStyle"
+                    style="@style/TextViewLargeStyle"
                     android:text="All sections">
                 </TextView>
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.Data.DataFunctions;
+import com.obsessed.e_journal.NewElements;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Employee;
 import com.obsessed.e_journal.School.Learner;
@@ -28,12 +29,15 @@ import java.util.ArrayList;
 public class AccountActivity extends AppCompatActivity {
     Data data;
     DataFunctions dataFunctions;
+    NewElements newElements;
     Person user;
-    ArrayList<EditText> editTextArrayList;
+
     TextView textView;
     EditText editText;
     LinearLayout linearLayout;
     GridLayout gridLayout;
+
+    ArrayList<EditText> editTextArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,7 @@ public class AccountActivity extends AppCompatActivity {
     private void init(){
         data = Data.getInstance();
         dataFunctions = DataFunctions.getInstance();
+        newElements = new NewElements(this);
         user = data.getUser();
 
         gridLayout = findViewById(R.id.grid);
@@ -143,46 +148,18 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void createLinearLayout(String[] types){
-        newLinearLayout();
+        linearLayout = newElements.newLinearLayout();
         for (String type: types) {
             if(type.equals("TextView")){
-                newTextView();
+                textView = newElements.newTextView();
                 linearLayout.addView(textView);
             } else if(type.equals("EditText")){
-                newEditText();
+                editText = newElements.newEditText();
+                editText.setEnabled(false);
+                editTextArrayList.add(editText);
                 linearLayout.addView(editText);
             } else Log.d("MyLog", "The object type is not being processed");
         }
         gridLayout.addView(linearLayout);
-    }
-
-    private void newTextView(){
-        textView = new TextView(getApplicationContext());
-        textView.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-    }
-
-    private void newEditText(){
-        editText = new EditText(getApplicationContext());
-        editText.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        editText.setEnabled(false);
-        editText.setTextColor(Color.BLACK);
-        editTextArrayList.add(editText);
-    }
-
-    private void newLinearLayout(){
-        linearLayout = new LinearLayout(getApplicationContext());
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setGravity(Gravity.CENTER);
     }
 }

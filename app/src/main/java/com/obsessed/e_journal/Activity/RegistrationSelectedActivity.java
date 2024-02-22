@@ -1,5 +1,7 @@
 package com.obsessed.e_journal.Activity;
 
+import static android.text.InputType.TYPE_CLASS_TEXT;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -22,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.obsessed.e_journal.AddEntryPersonToList;
 import com.obsessed.e_journal.Data.Data;
 import com.obsessed.e_journal.Data.DataFunctions;
+import com.obsessed.e_journal.NewElements;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Parent;
 
@@ -30,15 +33,18 @@ import java.util.ArrayList;
 public class RegistrationSelectedActivity extends AppCompatActivity {
     Data data;
     DataFunctions dataFunctions;
+    NewElements newElements;
     AddEntryPersonToList addEntryPersonToList;
+
     GridLayout gridLayout;
     LinearLayout linearLayout;
     Spinner spinner;
-    TextView textView, header;
+    TextView textView;
+    EditText editText;
+
     ArrayList<EditText> editTextArrayList;
     ArrayList<Spinner> spinnertArrayList;
     ArrayList<Parent> parentArrayList;
-    EditText editText;
     String person;
 
 
@@ -51,7 +57,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            person = extras.getString("person");
+            String person = extras.getString("person");
 
             if(person.equals("Learner")){
                 spinnertArrayList = new ArrayList<>();
@@ -99,12 +105,13 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
     private void init(){
         data = Data.getInstance();
         dataFunctions = DataFunctions.getInstance();
+        newElements = new NewElements(this);
 
         addEntryPersonToList = AddEntryPersonToList.getInstance();
         editTextArrayList = new ArrayList<>();
         gridLayout = findViewById(R.id.grid);
 
-        header = findViewById(R.id.header);
+        TextView header = findViewById(R.id.header);
         header.setText("Registration");
     }
 
@@ -152,71 +159,21 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
     }
 
     private void createLinearLayout(String[] types){
-        newLinearLayout();
+        linearLayout = newElements.newLinearLayout();
         for (String type: types) {
             if(type.equals("TextView")){
-                newTextView();
+                textView = newElements.newTextView();
                 linearLayout.addView(textView);
             } else if(type.equals("EditText")){
-                newEditText();
+                editText = newElements.newEditText();
+                editTextArrayList.add(editText);
                 linearLayout.addView(editText);
             } else if(type.equals("Spinner")) {
-                newSpinner();
+                spinner = newElements.newSpinner(dataFunctions.getParentsFullNames(), 0);
+                spinnertArrayList.add(spinner);
                 linearLayout.addView(spinner);
             }
         }
         gridLayout.addView(linearLayout);
-    }
-
-    private void newTextView(){
-        textView = new TextView(getApplicationContext());
-        textView.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-    }
-
-    private void newEditText(){
-        editText = new EditText(getApplicationContext());
-        editText.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        editTextArrayList.add(editText);
-    }
-
-    private void newLinearLayout(){
-        linearLayout = new LinearLayout(getApplicationContext());
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setGravity(Gravity.CENTER);
-    }
-
-    private void newSpinner() {
-        spinner = new Spinner(getApplicationContext());
-        textView.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item, dataFunctions.getParentsFullNames());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        };
-        spinner.setOnItemSelectedListener(itemSelectedListener);
-        spinnertArrayList.add(spinner);
     }
 }
