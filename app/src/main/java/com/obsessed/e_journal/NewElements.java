@@ -73,6 +73,10 @@ public class NewElements {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
+        button.setTextColor(ContextCompat.getColor(myContext, R.color.textColor));
+        button.setTextSize(myContext.getResources().getDimension(R.dimen.text_size)
+                / myContext.getResources().getDisplayMetrics().scaledDensity);
+        button.setBackground(myContext.getResources().getDrawable(R.drawable.button_style));
 
         return button;
     }

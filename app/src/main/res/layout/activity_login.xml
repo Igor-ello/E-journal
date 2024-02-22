@@ -73,11 +73,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin">
 
         <TextView
             style="@style/TextViewStyle"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:text="Not registered yet?">
         </TextView>
 
