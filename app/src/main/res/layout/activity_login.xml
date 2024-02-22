@@ -1,50 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <include layout="@layout/header"></include>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        style="@style/LinearLayoutMainStyle">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                style="@style/TextStyleNormal"
-                android:text="Who are you?">
+                style="@style/TextViewStyle"
+                android:text="@string/who_are_you">
             </TextView>
 
             <Spinner
                 android:id="@+id/spinner"
-                android:gravity="center"
-                style="@style/TextStyleNormal">
+                style="@style/TextViewStyle">
             </Spinner>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/participantField"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            style="@style/LinearLayoutStyle"
+            android:visibility="gone">
 
             <TextView
-                style="@style/TextStyleNormal"
+                style="@style/TextViewStyle"
                 android:text="Введите свой ID">
             </TextView>
 
             <EditText
                 android:id="@+id/et_participant"
-                style="@style/TextStyleNormal"
-                android:layout_width="fill_parent"
+                style="@style/TextViewStyle"
                 android:inputType="number">
             </EditText>
 
@@ -52,32 +45,27 @@
 
         <LinearLayout
             android:id="@+id/parentField"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            style="@style/LinearLayoutStyle"
+            android:visibility="gone">
 
             <TextView
-                style="@style/TextStyleNormal"
-                android:text="Введите ID вашего ребёнка">
+                style="@style/TextViewStyle"
+                android:text="@string/id">
             </TextView>
 
             <EditText
                 android:id="@+id/et_parent"
-                style="@style/TextStyleNormal"
-                android:layout_width="fill_parent"
+                style="@style/TextViewStyle"
                 android:inputType="number">
             </EditText>
 
         </LinearLayout>
 
-        <Button
+        <TextView
             android:id="@+id/save"
-            style="@style/TextStyleBold"
-            android:layout_marginTop="10dp"
+            style="@style/ButtonStyle"
             android:text="Login">
-        </Button>
+        </TextView>
 
     </LinearLayout>
 
@@ -85,24 +73,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:orientation="vertical">
 
         <TextView
-            style="@style/TextStyleNormal"
+            style="@style/TextViewStyle"
             android:layout_gravity="center"
             android:text="Not registered yet?">
         </TextView>
 
-        <Button
+        <TextView
             android:id="@+id/registration"
-            style="@style/TextStyleBold"
+            style="@style/ButtonStyle"
             android:layout_gravity="center"
             android:text="Registraton">
-        </Button>
+        </TextView>
 
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

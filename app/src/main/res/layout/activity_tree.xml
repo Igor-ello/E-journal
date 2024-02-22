@@ -20,91 +20,87 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="10dp">
+                style="@style/LinearLayoutMainStyle">
 
                 <TextView
-                    style="@style/EJournalTvStyle"
+                    style="@style/TextViewHeaderStyle"
                     android:text="All learners">
                 </TextView>
 
                 <GridLayout
                     android:id="@+id/gridLearners"
-                    style="@style/EJournalGridStyle">
+                    style="@style/TextViewStyle">
                 </GridLayout>
 
                 <TextView
-                    style="@style/EJournalTvStyle"
+                    style="@style/TextViewHeaderStyle"
                     android:text="All parents">
                 </TextView>
 
                 <GridLayout
                     android:id="@+id/gridParents"
-                    style="@style/EJournalGridStyle">
+                    style="@style/TextViewStyle">
                 </GridLayout>
 
                 <TextView
-                    style="@style/EJournalTvStyle"
+                    style="@style/TextViewHeaderStyle"
                     android:text="All teachers">
                 </TextView>
 
                 <GridLayout
                     android:id="@+id/gridTeachers"
-                    style="@style/EJournalGridStyle">
+                    style="@style/TextViewStyle">
                 </GridLayout>
 
                 <TextView
-                    style="@style/EJournalTvStyle"
+                    style="@style/TextViewHeaderStyle"
                     android:text="All employees">
                 </TextView>
 
                 <GridLayout
                     android:id="@+id/gridEmployees"
-                    style="@style/EJournalGridStyle">
+                    style="@style/TextViewStyle">
                 </GridLayout>
 
                 <TextView
-                    style="@style/EJournalTvStyle"
+                    style="@style/TextViewHeaderStyle"
                     android:text="All schools">
                 </TextView>
 
                 <GridLayout
                     android:id="@+id/gridSchools"
-                    style="@style/EJournalGridStyle">
+                    style="@style/TextViewStyle">
                 </GridLayout>
 
                 <TextView
-                    style="@style/EJournalTvStyle"
+                    style="@style/TextViewHeaderStyle"
                     android:text="All classes">
                 </TextView>
 
                 <GridLayout
                     android:id="@+id/gridClasses"
-                    style="@style/EJournalGridStyle">
+                    style="@style/TextViewStyle">
                 </GridLayout>
 
                 <TextView
-                    style="@style/EJournalTvStyle"
+                    style="@style/TextViewHeaderStyle"
                     android:text="All electives">
                 </TextView>
 
                 <GridLayout
                     android:id="@+id/gridElectives"
-                    style="@style/EJournalGridStyle">
+                    style="@style/TextViewStyle">
                 </GridLayout>
 
                 <TextView
-                    style="@style/EJournalTvStyle"
+                    style="@style/TextViewHeaderStyle"
                     android:text="All sections">
                 </TextView>
 
                 <GridLayout
                     android:id="@+id/gridSections"
-                    style="@style/EJournalGridStyle">
+                    style="@style/TextViewStyle">
                 </GridLayout>
-
 
                 <TextView
                     android:layout_width="wrap_content"

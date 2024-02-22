@@ -19,12 +19,12 @@
             android:orientation="vertical">
         </GridLayout>
 
-        <Button
+        <TextView
             android:id="@+id/save"
-            style="@style/TextStyleBold"
+            style="@style/ButtonStyle"
             android:layout_marginTop="10dp"
             android:text="Save">
-        </Button>
+        </TextView>
 
     </LinearLayout>
 

@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="TextStyleBold">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="TextStyleNormal">>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-    
-    <style name="RegistrationButtonStyle">
-        <item name="android:layout_width">200dp</item>
-        <item name="android:layout_height">75dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:background">@color/green</item>
-        <item name="android:layout_marginTop">20dp</item>
-    </style>
-
-    <style name="EJournalTvStyle">
+    <style name="TextViewStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/textColor</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:layout_marginTop">15dp</item>
+    </style>
+
+    <style name="TextViewHeaderStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="HeaderStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/basic</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="ButtonStyle">
+        <item name="android:layout_width">175dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@color/accent</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="LinearLayoutMainStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="LinearLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+
+    <style name="EJournalAdminLayoutStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="EJournalAdminTvStyle">
@@ -42,12 +64,7 @@
         <item name="android:layout_margin">5dp</item>
     </style>
 
-    <style name="EJournalAdminLayoutStyle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-    </style>
+<!--
 
     <style name="EJournalGridStyle">
         <item name="android:layout_width">match_parent</item>
@@ -57,5 +74,5 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">20sp</item>
         <item name="android:layout_marginTop">5dp</item>
-    </style>
+    </style>-->
 </resources>
