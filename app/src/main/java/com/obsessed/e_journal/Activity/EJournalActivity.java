@@ -1,14 +1,11 @@
 package com.obsessed.e_journal.Activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -19,23 +16,21 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.obsessed.e_journal.Data.Data;
+import com.obsessed.e_journal.Data.DataFunctions;
 import com.obsessed.e_journal.R;
-import com.obsessed.e_journal.School.Class;
-import com.obsessed.e_journal.School.Elective;
 import com.obsessed.e_journal.School.Employee;
 import com.obsessed.e_journal.School.Learner;
 import com.obsessed.e_journal.School.Parent;
 import com.obsessed.e_journal.School.Person;
-import com.obsessed.e_journal.School.School;
-import com.obsessed.e_journal.School.Section;
 import com.obsessed.e_journal.School.Teacher;
-
-import java.util.ArrayList;
 
 public class EJournalActivity extends AppCompatActivity {
     Data data;
+    DataFunctions dataFunctions;
     Person user;
     TextView textView;
+    LinearLayout linearLayout;
+    GridLayout gridLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +40,18 @@ public class EJournalActivity extends AppCompatActivity {
         init();
 
         if(user instanceof Employee){
+            initEmployee();
             if(((Employee) user).getPosition().equals("Admin") &&
                     ((Employee) user).getCardID() == data.getEmpoloyeesList().get(0).getCardID()) {
                 LinearLayout linearLayout = findViewById(R.id.adminConsole);
                 linearLayout.setVisibility(View.VISIBLE);
-            } else {
-                LinearLayout linearLayout = findViewById(R.id.adminConsole);
-                linearLayout.setVisibility(View.GONE);
             }
         } else if(user instanceof Learner){
-
+            initLearner();
         } else if(user instanceof Parent) {
-
+            initParent();
         } else if(user instanceof Teacher){
-
+            initTeacher();
         } else {
             LinearLayout linearLayout = findViewById(R.id.adminConsole);
             linearLayout.setVisibility(View.GONE);
@@ -100,10 +93,12 @@ public class EJournalActivity extends AppCompatActivity {
 
     private void init(){
         data = Data.getInstance();
+        dataFunctions = DataFunctions.getInstance();
         user = data.getUser();
 
         TextView header = findViewById(R.id.header);
         header.setText("EJournal");
+        gridLayout = findViewById(R.id.grid);
     }
 
 
@@ -113,6 +108,54 @@ public class EJournalActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void initLearner(){
+        newLinearLayout();
+        textView = newTextView("Your schools");
+        textView = newTextView();
+        textView.setText(dataFunctions.getSchoolsByLearnerID(((Learner) user).getCardID()));
+
+        newLinearLayout();
+        textView = newTextView("Your classes");
+        textView = newTextView();
+        textView.setText(dataFunctions.getClassesByLearnerID(((Learner) user).getCardID()));
+
+        newLinearLayout();
+        textView = newTextView("Your electives");
+        textView = newTextView();
+        textView.setText(dataFunctions.getElectivesByLearnerID(((Learner) user).getCardID()));
+
+        newLinearLayout();
+        textView = newTextView("Your sections");
+        textView = newTextView();
+        textView.setText(dataFunctions.getSectionsByLearnerID(((Learner) user).getCardID()));
+    }
+
+    private void initParent() {
+        newLinearLayout();
+        textView = newTextView("Nothing, your are parent");
+    }
+
+    private void initTeacher() {
+        newLinearLayout();
+        textView = newTextView("Your classes");
+        textView = newTextView();
+        textView.setText(dataFunctions.getClassesByTeacherID(((Teacher) user).getCardID()));
+
+        newLinearLayout();
+        textView = newTextView("Your electives");
+        textView = newTextView();
+        textView.setText(dataFunctions.getElectivesByTeacherID(((Teacher) user).getCardID()));
+
+        newLinearLayout();
+        textView = newTextView("Your sections");
+        textView = newTextView();
+        textView.setText(dataFunctions.getSectionsByTeacherID(((Teacher) user).getCardID()));
+    }
+
+    private void initEmployee(){
+        newLinearLayout();
+        textView = newTextView("Nothing, your are employee");
+    }
 
     private TextView newTextView(){
         textView = new TextView(getApplicationContext());
@@ -121,7 +164,39 @@ public class EJournalActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        linearLayout.addView(textView);
         return textView;
+    }
+
+    private TextView newTextView(String text){
+        textView = new TextView(getApplicationContext());
+        textView.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+
+        SpannableString spanString = new SpannableString(text);
+        spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spanString);
+
+        linearLayout.addView(textView);
+        return textView;
+    }
+
+    private void newLinearLayout(){
+        linearLayout = new LinearLayout(getApplicationContext());
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.setMargins(0, 10, 0, 0);
+
+        linearLayout.setLayoutParams(layoutParams);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setGravity(Gravity.CENTER);
+
+        gridLayout.addView(linearLayout);
     }
 
 }

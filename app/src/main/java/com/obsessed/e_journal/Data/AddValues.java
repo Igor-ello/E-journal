@@ -114,6 +114,9 @@ public class AddValues {
         electivesList.add(new Elective("Маткульт", new ArrayList<>(Arrays.asList(
                 learnersList.get(0), learnersList.get(3), learnersList.get(4),
                 learnersList.get(5))), teachersList.get(0)));
+        electivesList.add(new Elective("Теория движения", new ArrayList<>(Arrays.asList(
+                learnersList.get(0), learnersList.get(3), learnersList.get(4),
+                learnersList.get(5))), teachersList.get(2)));
 
         return electivesList;
     }

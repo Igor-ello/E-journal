@@ -5,6 +5,7 @@ import com.obsessed.e_journal.School.Elective;
 import com.obsessed.e_journal.School.Employee;
 import com.obsessed.e_journal.School.Learner;
 import com.obsessed.e_journal.School.Parent;
+import com.obsessed.e_journal.School.School;
 import com.obsessed.e_journal.School.Section;
 import com.obsessed.e_journal.School.Teacher;
 
@@ -135,5 +136,113 @@ public class DataFunctions{
                 data.setParentArrayList(arrayList);
             }
         }
+    }
+
+    //ObjectByLearnerID
+    public String getSchoolsByLearnerID(int id){
+        String text = "";
+        for (School school: data.getSchoolsList()) {
+            for (Learner learner: school.getLearners()) {
+                if (learner.getCardID() == id){
+                    if(!text.equals(""))
+                        text += ", ";
+                    text += school.getName();
+                }
+            }
+        }
+        if(text.equals(""))
+            text = "Нет";
+        return text;
+    }
+
+    public String getClassesByLearnerID(int id){
+        String text = "";
+        for (Class cls: data.getClassesList()) {
+            for (Learner learner: cls.getLearners()) {
+                if (learner.getCardID() == id){
+                    if(!text.equals(""))
+                        text += ", ";
+                    text += cls.getNumber();
+                }
+            }
+        }
+        if(text.equals(""))
+            text = "Нет";
+        return text;
+    }
+
+    public String getElectivesByLearnerID(int id){
+        String text = "";
+        for (Elective elective: data.getElectivesList()) {
+            for (Learner learner: elective.getLearners()) {
+                if (learner.getCardID() == id){
+                    if(!text.equals(""))
+                        text += ", ";
+                    text += elective.getAcademicSubject();
+                }
+            }
+        }
+        if(text.equals(""))
+            text = "Нет";
+        return text;
+    }
+
+    public String getSectionsByLearnerID(int id){
+        String text = "";
+        for (Section section: data.getSectionsList()) {
+            for (Learner learner: section.getLearners()) {
+                if (learner.getCardID() == id){
+                    if(!text.equals(""))
+                        text += ", ";
+                    text += section.getName();
+                }
+            }
+        }
+        if(text.equals(""))
+            text = "Нет";
+        return text;
+    }
+
+    //
+    public String getClassesByTeacherID(int id){
+        String text = "";
+        for (Class cls: data.getClassesList()) {
+            if (cls.getClassTeacher().getCardID() == id){
+                if(!text.equals(""))
+                    text += ", ";
+                text += cls.getNumber();
+            }
+        }
+        if(text.equals(""))
+            text = "Нет";
+        return text;
+    }
+
+    public String getElectivesByTeacherID(int id){
+        String text = "";
+        for (Elective elective: data.getElectivesList()) {
+            if (elective.getClassTeacher().getCardID() == id){
+                if(!text.equals(""))
+                    text += ", ";
+                text += elective.getAcademicSubject();
+            }
+        }
+        if(text.equals(""))
+            text = "Нет";
+        return text;
+    }
+
+    public String getSectionsByTeacherID(int id){
+        String text = "";
+        for (Section section: data.getSectionsList()) {
+            if (section.getClassTeacher().getCardID() == id){
+                if(!text.equals(""))
+                    text += ", ";
+                text += section.getName();
+            }
+        }
+        if(text.equals(""))
+            text = "Нет";
+        return text;
     }
 }
