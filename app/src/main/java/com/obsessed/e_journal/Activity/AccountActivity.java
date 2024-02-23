@@ -144,7 +144,7 @@ public class AccountActivity extends AppCompatActivity {
 
         createLinearLayout(new String[]{"TextView", "EditText"});
         textView.setText("Card ID: ");
-        editText.setText("*****");
+        editText.setText(String.valueOf(((Participant) user).getCardID()));
     }
 
     private void createLinearLayout(String[] types){

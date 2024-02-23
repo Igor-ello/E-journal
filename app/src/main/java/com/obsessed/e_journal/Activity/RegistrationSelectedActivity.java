@@ -27,6 +27,7 @@ import com.obsessed.e_journal.Data.DataFunctions;
 import com.obsessed.e_journal.NewElements;
 import com.obsessed.e_journal.R;
 import com.obsessed.e_journal.School.Parent;
+import com.obsessed.e_journal.School.Participant;
 
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            String person = extras.getString("person");
+            person = extras.getString("person");
 
             if(person.equals("Learner")){
                 spinnertArrayList = new ArrayList<>();
@@ -73,6 +74,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
 
         findViewById(R.id.save).setOnClickListener(view -> {
             boolean isAllFialdsFillIn = true;
+            boolean isParent = false;
             for (EditText ed: editTextArrayList) {
                 if(ed.getText().equals("") || ed.getText().equals(null))
                     isAllFialdsFillIn = false;
@@ -86,7 +88,7 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
                     data.setUser(data.getLearnersList().get(data.getLearnersList().size()-1));
                 } else if(person.equals("Parent")) {
                     addEntryPersonToList.addEntryParentsList(editTextArrayList);
-                    data.setUser(data.getParentsList().get(data.getParentsList().size()-1));
+                    isParent = true;
                 } else if(person.equals("Teacher")) {
                     addEntryPersonToList.addEntryTeachersList(editTextArrayList);
                     data.setUser(data.getTeachersList().get(data.getTeachersList().size()-1));
@@ -95,9 +97,15 @@ public class RegistrationSelectedActivity extends AppCompatActivity {
                     data.setUser(data.getEmpoloyeesList().get(data.getEmpoloyeesList().size()-1));
                 } else Log.d("MyLog", "The message has not been received!");
 
-                Intent intent = new Intent(RegistrationSelectedActivity.this, EJournalActivity.class);
+                Intent intent;
+                if(!isParent){
+                    intent = new Intent(RegistrationSelectedActivity.this, EJournalActivity.class);
+                } else {
+                    intent = new Intent(RegistrationSelectedActivity.this, LoginActivity.class);
+                }
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+
             } else Toast.makeText(this, "Fill in all the fields", Toast.LENGTH_SHORT).show();
         });
     }
